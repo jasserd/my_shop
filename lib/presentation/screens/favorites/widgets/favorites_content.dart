@@ -5,6 +5,7 @@ import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/navigation/navigation.dart';
 import 'package:my_shop/presentation/screens/favorites/bloc/favorites_cubit.dart';
+import 'package:my_shop/presentation/screens/favorites/bloc/favorites_state.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class FavoritesContent extends StatelessWidget {

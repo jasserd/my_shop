@@ -1,24 +1,8 @@
-import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:my_shop/domain/entities/product.dart';
-import 'package:my_shop/domain/entities/story.dart';
 import 'package:my_shop/domain/repositories/product_repository.dart';
-
-part 'home_cubit.mapper.dart';
-
-@MappableClass()
-class HomeState with HomeStateMappable {
-  const HomeState({
-    this.stories = const [],
-    this.products = const [],
-    this.isLoading = true,
-  });
-
-  final List<Story> stories;
-  final List<Product> products;
-  final bool isLoading;
-}
+import 'package:my_shop/presentation/screens/home/bloc/home_state.dart';
 
 @injectable
 class HomeCubit extends Cubit<HomeState> {

@@ -4,6 +4,7 @@ import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/domain/entities/story.dart';
 import 'package:my_shop/presentation/screens/home/bloc/home_cubit.dart';
+import 'package:my_shop/presentation/screens/home/bloc/home_state.dart';
 import 'package:my_shop/presentation/screens/home/widgets/banner_carousel.dart';
 import 'package:my_shop/presentation/screens/home/widgets/stories_section.dart';
 import 'package:my_shop/presentation/screens/home/widgets/story_viewer.dart';

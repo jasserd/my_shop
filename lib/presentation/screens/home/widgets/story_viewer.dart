@@ -53,10 +53,7 @@ class _StoryViewer extends StatelessWidget {
                   IconButton(
                     onPressed: () => Navigator.of(context).pop(),
                     tooltip: localizations.closeStoryTooltip,
-                    icon: const Icon(
-                      Icons.close,
-                      color: AppColors.background,
-                    ),
+                    icon: const Icon(Icons.close, color: AppColors.background),
                   ),
                 ],
               ),

@@ -33,6 +33,108 @@ class AppLocalizationsRu extends AppLocalizations {
   String get favoritesTitle => 'Избранное';
 
   @override
+  String get catalogTitle => 'Каталог';
+
+  @override
+  String get sortByPrice => 'Цена';
+
+  @override
+  String get sortAlphabetAscending => 'А–Я';
+
+  @override
+  String get sortAlphabetDescending => 'Я–А';
+
+  @override
+  String get categoryClothing => 'Одежда';
+
+  @override
+  String get categoryShoes => 'Обувь';
+
+  @override
+  String get categoryAccessories => 'Аксессуары';
+
+  @override
+  String get categoryElectronics => 'Электроника';
+
+  @override
+  String get categoryBooks => 'Книги';
+
+  @override
+  String get categoryHome => 'Дом';
+
+  @override
+  String get catalogLinenShirt => 'Льняная рубашка';
+
+  @override
+  String get catalogWoolCoat => 'Шерстяное пальто';
+
+  @override
+  String get catalogSilkDress => 'Шёлковое платье';
+
+  @override
+  String get catalogCottonTrousers => 'Хлопковые брюки';
+
+  @override
+  String get catalogLeatherSneakers => 'Кожаные кеды';
+
+  @override
+  String get catalogClassicLoafers => 'Классические лоферы';
+
+  @override
+  String get catalogSuedeBoots => 'Замшевые ботинки';
+
+  @override
+  String get catalogMinimalSandals => 'Минималистичные сандалии';
+
+  @override
+  String get catalogLeatherBag => 'Кожаная сумка';
+
+  @override
+  String get catalogGoldEarrings => 'Золотистые серьги';
+
+  @override
+  String get catalogSilkScarf => 'Шёлковый шарф';
+
+  @override
+  String get catalogClassicWatch => 'Классические часы';
+
+  @override
+  String get catalogWirelessHeadphones => 'Беспроводные наушники';
+
+  @override
+  String get catalogSmartSpeaker => 'Умная колонка';
+
+  @override
+  String get catalogCompactCamera => 'Компактная камера';
+
+  @override
+  String get catalogPortableCharger => 'Портативный аккумулятор';
+
+  @override
+  String get catalogDesignBook => 'Книга о дизайне';
+
+  @override
+  String get catalogArchitectureAlbum => 'Альбом по архитектуре';
+
+  @override
+  String get catalogArtHistory => 'История искусства';
+
+  @override
+  String get catalogModernInteriors => 'Современные интерьеры';
+
+  @override
+  String get catalogCeramicVase => 'Керамическая ваза';
+
+  @override
+  String get catalogAmberCandles => 'Набор свечей Amber';
+
+  @override
+  String get catalogGeometryPoster => 'Постер Geometrical Harmony';
+
+  @override
+  String get catalogJuteBasket => 'Корзина из джута';
+
+  @override
   String get emptyFavoritesTitle => 'Список пуст';
 
   @override
@@ -41,6 +143,67 @@ class AppLocalizationsRu extends AppLocalizations {
 
   @override
   String get goShoppingButton => 'Перейти к покупкам';
+
+  @override
+  String get cartTitle => 'Корзина';
+
+  @override
+  String get emptyCartTitle => 'Корзина пуста';
+
+  @override
+  String get deliveryAddressTitle => 'Адрес доставки';
+
+  @override
+  String get cityLabel => 'Город *';
+
+  @override
+  String get cityHint => 'Москва';
+
+  @override
+  String get streetLabel => 'Улица *';
+
+  @override
+  String get streetHint => 'Никольская';
+
+  @override
+  String get houseLabel => 'Дом *';
+
+  @override
+  String get houseHint => '10';
+
+  @override
+  String get apartmentLabel => 'Квартира *';
+
+  @override
+  String get apartmentHint => '42';
+
+  @override
+  String get postalCodeLabel => 'Индекс';
+
+  @override
+  String get postalCodeHint => '101000';
+
+  @override
+  String get totalPaymentLabel => 'Итого к оплате';
+
+  @override
+  String get checkoutButton => 'Перейти к оплате';
+
+  @override
+  String get increaseQuantityTooltip => 'Увеличить количество';
+
+  @override
+  String get decreaseQuantityTooltip => 'Уменьшить количество';
+
+  @override
+  String get paymentTitle => 'Оплата';
+
+  @override
+  String get paymentSuccessTitle => 'Оплата прошла успешно!';
+
+  @override
+  String get paymentSuccessDescription =>
+      'Спасибо за заказ! Ваш заказ принят в обработку. Ожидайте доставку в ближайшее время.';
 
   @override
   String get storyNew => 'Новинки';

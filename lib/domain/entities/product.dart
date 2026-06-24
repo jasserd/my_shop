@@ -13,6 +13,10 @@ class Product with ProductMappable {
     this.isInCart = false,
   });
 
+  factory Product.fromJson(Map<String, Object?> json) {
+    return ProductMapper.fromMap(Map<String, dynamic>.from(json));
+  }
+
   final String id;
   final String titleKey;
   final String imageUrl;

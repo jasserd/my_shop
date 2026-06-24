@@ -1,18 +1,8 @@
-import 'package:dart_mappable/dart_mappable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:my_shop/domain/entities/product.dart';
 import 'package:my_shop/domain/repositories/product_repository.dart';
-
-part 'favorites_cubit.mapper.dart';
-
-@MappableClass()
-class FavoritesState with FavoritesStateMappable {
-  const FavoritesState({this.favorites = const [], this.isLoading = true});
-
-  final List<Product> favorites;
-  final bool isLoading;
-}
+import 'package:my_shop/presentation/screens/favorites/bloc/favorites_state.dart';
 
 @injectable
 class FavoritesCubit extends Cubit<FavoritesState> {

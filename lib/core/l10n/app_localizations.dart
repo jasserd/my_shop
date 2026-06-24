@@ -142,6 +142,210 @@ abstract class AppLocalizations {
   /// **'Избранное'**
   String get favoritesTitle;
 
+  /// No description provided for @catalogTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Каталог'**
+  String get catalogTitle;
+
+  /// No description provided for @sortByPrice.
+  ///
+  /// In ru, this message translates to:
+  /// **'Цена'**
+  String get sortByPrice;
+
+  /// No description provided for @sortAlphabetAscending.
+  ///
+  /// In ru, this message translates to:
+  /// **'А–Я'**
+  String get sortAlphabetAscending;
+
+  /// No description provided for @sortAlphabetDescending.
+  ///
+  /// In ru, this message translates to:
+  /// **'Я–А'**
+  String get sortAlphabetDescending;
+
+  /// No description provided for @categoryClothing.
+  ///
+  /// In ru, this message translates to:
+  /// **'Одежда'**
+  String get categoryClothing;
+
+  /// No description provided for @categoryShoes.
+  ///
+  /// In ru, this message translates to:
+  /// **'Обувь'**
+  String get categoryShoes;
+
+  /// No description provided for @categoryAccessories.
+  ///
+  /// In ru, this message translates to:
+  /// **'Аксессуары'**
+  String get categoryAccessories;
+
+  /// No description provided for @categoryElectronics.
+  ///
+  /// In ru, this message translates to:
+  /// **'Электроника'**
+  String get categoryElectronics;
+
+  /// No description provided for @categoryBooks.
+  ///
+  /// In ru, this message translates to:
+  /// **'Книги'**
+  String get categoryBooks;
+
+  /// No description provided for @categoryHome.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дом'**
+  String get categoryHome;
+
+  /// No description provided for @catalogLinenShirt.
+  ///
+  /// In ru, this message translates to:
+  /// **'Льняная рубашка'**
+  String get catalogLinenShirt;
+
+  /// No description provided for @catalogWoolCoat.
+  ///
+  /// In ru, this message translates to:
+  /// **'Шерстяное пальто'**
+  String get catalogWoolCoat;
+
+  /// No description provided for @catalogSilkDress.
+  ///
+  /// In ru, this message translates to:
+  /// **'Шёлковое платье'**
+  String get catalogSilkDress;
+
+  /// No description provided for @catalogCottonTrousers.
+  ///
+  /// In ru, this message translates to:
+  /// **'Хлопковые брюки'**
+  String get catalogCottonTrousers;
+
+  /// No description provided for @catalogLeatherSneakers.
+  ///
+  /// In ru, this message translates to:
+  /// **'Кожаные кеды'**
+  String get catalogLeatherSneakers;
+
+  /// No description provided for @catalogClassicLoafers.
+  ///
+  /// In ru, this message translates to:
+  /// **'Классические лоферы'**
+  String get catalogClassicLoafers;
+
+  /// No description provided for @catalogSuedeBoots.
+  ///
+  /// In ru, this message translates to:
+  /// **'Замшевые ботинки'**
+  String get catalogSuedeBoots;
+
+  /// No description provided for @catalogMinimalSandals.
+  ///
+  /// In ru, this message translates to:
+  /// **'Минималистичные сандалии'**
+  String get catalogMinimalSandals;
+
+  /// No description provided for @catalogLeatherBag.
+  ///
+  /// In ru, this message translates to:
+  /// **'Кожаная сумка'**
+  String get catalogLeatherBag;
+
+  /// No description provided for @catalogGoldEarrings.
+  ///
+  /// In ru, this message translates to:
+  /// **'Золотистые серьги'**
+  String get catalogGoldEarrings;
+
+  /// No description provided for @catalogSilkScarf.
+  ///
+  /// In ru, this message translates to:
+  /// **'Шёлковый шарф'**
+  String get catalogSilkScarf;
+
+  /// No description provided for @catalogClassicWatch.
+  ///
+  /// In ru, this message translates to:
+  /// **'Классические часы'**
+  String get catalogClassicWatch;
+
+  /// No description provided for @catalogWirelessHeadphones.
+  ///
+  /// In ru, this message translates to:
+  /// **'Беспроводные наушники'**
+  String get catalogWirelessHeadphones;
+
+  /// No description provided for @catalogSmartSpeaker.
+  ///
+  /// In ru, this message translates to:
+  /// **'Умная колонка'**
+  String get catalogSmartSpeaker;
+
+  /// No description provided for @catalogCompactCamera.
+  ///
+  /// In ru, this message translates to:
+  /// **'Компактная камера'**
+  String get catalogCompactCamera;
+
+  /// No description provided for @catalogPortableCharger.
+  ///
+  /// In ru, this message translates to:
+  /// **'Портативный аккумулятор'**
+  String get catalogPortableCharger;
+
+  /// No description provided for @catalogDesignBook.
+  ///
+  /// In ru, this message translates to:
+  /// **'Книга о дизайне'**
+  String get catalogDesignBook;
+
+  /// No description provided for @catalogArchitectureAlbum.
+  ///
+  /// In ru, this message translates to:
+  /// **'Альбом по архитектуре'**
+  String get catalogArchitectureAlbum;
+
+  /// No description provided for @catalogArtHistory.
+  ///
+  /// In ru, this message translates to:
+  /// **'История искусства'**
+  String get catalogArtHistory;
+
+  /// No description provided for @catalogModernInteriors.
+  ///
+  /// In ru, this message translates to:
+  /// **'Современные интерьеры'**
+  String get catalogModernInteriors;
+
+  /// No description provided for @catalogCeramicVase.
+  ///
+  /// In ru, this message translates to:
+  /// **'Керамическая ваза'**
+  String get catalogCeramicVase;
+
+  /// No description provided for @catalogAmberCandles.
+  ///
+  /// In ru, this message translates to:
+  /// **'Набор свечей Amber'**
+  String get catalogAmberCandles;
+
+  /// No description provided for @catalogGeometryPoster.
+  ///
+  /// In ru, this message translates to:
+  /// **'Постер Geometrical Harmony'**
+  String get catalogGeometryPoster;
+
+  /// No description provided for @catalogJuteBasket.
+  ///
+  /// In ru, this message translates to:
+  /// **'Корзина из джута'**
+  String get catalogJuteBasket;
+
   /// No description provided for @emptyFavoritesTitle.
   ///
   /// In ru, this message translates to:
@@ -159,6 +363,126 @@ abstract class AppLocalizations {
   /// In ru, this message translates to:
   /// **'Перейти к покупкам'**
   String get goShoppingButton;
+
+  /// No description provided for @cartTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Корзина'**
+  String get cartTitle;
+
+  /// No description provided for @emptyCartTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Корзина пуста'**
+  String get emptyCartTitle;
+
+  /// No description provided for @deliveryAddressTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Адрес доставки'**
+  String get deliveryAddressTitle;
+
+  /// No description provided for @cityLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Город *'**
+  String get cityLabel;
+
+  /// No description provided for @cityHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Москва'**
+  String get cityHint;
+
+  /// No description provided for @streetLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Улица *'**
+  String get streetLabel;
+
+  /// No description provided for @streetHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'Никольская'**
+  String get streetHint;
+
+  /// No description provided for @houseLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Дом *'**
+  String get houseLabel;
+
+  /// No description provided for @houseHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'10'**
+  String get houseHint;
+
+  /// No description provided for @apartmentLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Квартира *'**
+  String get apartmentLabel;
+
+  /// No description provided for @apartmentHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'42'**
+  String get apartmentHint;
+
+  /// No description provided for @postalCodeLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Индекс'**
+  String get postalCodeLabel;
+
+  /// No description provided for @postalCodeHint.
+  ///
+  /// In ru, this message translates to:
+  /// **'101000'**
+  String get postalCodeHint;
+
+  /// No description provided for @totalPaymentLabel.
+  ///
+  /// In ru, this message translates to:
+  /// **'Итого к оплате'**
+  String get totalPaymentLabel;
+
+  /// No description provided for @checkoutButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перейти к оплате'**
+  String get checkoutButton;
+
+  /// No description provided for @increaseQuantityTooltip.
+  ///
+  /// In ru, this message translates to:
+  /// **'Увеличить количество'**
+  String get increaseQuantityTooltip;
+
+  /// No description provided for @decreaseQuantityTooltip.
+  ///
+  /// In ru, this message translates to:
+  /// **'Уменьшить количество'**
+  String get decreaseQuantityTooltip;
+
+  /// No description provided for @paymentTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата'**
+  String get paymentTitle;
+
+  /// No description provided for @paymentSuccessTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата прошла успешно!'**
+  String get paymentSuccessTitle;
+
+  /// No description provided for @paymentSuccessDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Спасибо за заказ! Ваш заказ принят в обработку. Ожидайте доставку в ближайшее время.'**
+  String get paymentSuccessDescription;
 
   /// No description provided for @storyNew.
   ///
