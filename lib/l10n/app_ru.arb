@@ -1,9 +1,0 @@
-{
-  "@@locale": "ru",
-  "appName": "MyShop",
-  "loginLabel": "Логин",
-  "loginHint": "example@myshop.ru",
-  "passwordLabel": "Пароль",
-  "passwordHint": "Введите пароль",
-  "signInButton": "Войти"
-}

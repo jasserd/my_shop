@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:my_shop/core/constants/app_sizes.dart';
-import 'package:my_shop/core/constants/app_text_styles.dart';
-import 'package:my_shop/l10n/app_localizations.dart';
-import 'package:my_shop/presentation/bloc/auth/auth_cubit.dart';
-import 'package:my_shop/presentation/bloc/auth/auth_state.dart';
-import 'package:my_shop/shared/app_button.dart';
-import 'package:my_shop/shared/app_text.dart';
-import 'package:my_shop/shared/app_text_field.dart';
+import 'package:go_router/go_router.dart';
+import 'package:my_shop/core/constants/constants.dart';
+import 'package:my_shop/core/l10n/app_localizations.dart';
+import 'package:my_shop/core/navigation/navigation.dart';
+import 'package:my_shop/presentation/screens/auth/bloc/auth_cubit.dart';
+import 'package:my_shop/presentation/screens/auth/bloc/auth_state.dart';
+import 'package:my_shop/shared/widgets/widgets.dart';
 
 class AuthScreen extends StatelessWidget {
   const AuthScreen({super.key});
@@ -50,7 +49,10 @@ class AuthScreen extends StatelessWidget {
                     return AppButton(
                       text: localizations.signInButton,
                       onPressed: isButtonEnabled
-                          ? () => FocusScope.of(context).unfocus()
+                          ? () {
+                              FocusScope.of(context).unfocus();
+                              context.go(AppRoutes.home);
+                            }
                           : null,
                     );
                   },

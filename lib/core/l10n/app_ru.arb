@@ -1,0 +1,46 @@
+{
+  "@@locale": "ru",
+  "appName": "MyShop",
+  "loginLabel": "Логин",
+  "loginHint": "example@myshop.ru",
+  "passwordLabel": "Пароль",
+  "passwordHint": "Введите пароль",
+  "signInButton": "Войти",
+  "popularTitle": "Популярное",
+  "storyNew": "Новинки",
+  "storyDecor": "Декор",
+  "storyAccessories": "Аксессуары",
+  "storyCare": "Уход",
+  "productLamp": "Керамическая лампа «Эфир»",
+  "productCandle": "Ароматическая свеча «Сандал и Кожа»",
+  "productLinen": "Комплект постельного белья из органического хлопка",
+  "productBowl": "Ваза для фруктов из массива ореха",
+  "productVase": "Керамическая ваза ручной работы",
+  "productChair": "Кресло из натурального дерева",
+  "productPerfume": "Парфюмированная вода Amber",
+  "productDecor": "Декоративный набор для гостиной",
+  "bannerCollectionTitle": "Сезонная\nколлекция",
+  "bannerCollectionSubtitle": "Скидки до 30% на\nизбранные товары\ndекора",
+  "bannerComfortTitle": "Тёплый\nинтерьер",
+  "bannerComfortSubtitle": "Новая коллекция для\nуютного дома",
+  "bannerDetailsTitle": "Важные\nдетали",
+  "bannerDetailsSubtitle": "Акценты, которые\nсоздают настроение",
+  "homeNavigation": "Home",
+  "searchNavigation": "Search",
+  "wishlistNavigation": "Wishlist",
+  "ordersNavigation": "Orders",
+  "profileTooltip": "Профиль",
+  "addToFavoritesTooltip": "Добавить в избранное",
+  "removeFromFavoritesTooltip": "Удалить из избранного",
+  "addToCartTooltip": "Добавить в корзину",
+  "removeFromCartTooltip": "Удалить из корзины",
+  "closeStoryTooltip": "Закрыть историю",
+  "productPrice": "{price} ₽",
+  "@productPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  }
+}

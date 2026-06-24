@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_shop/core/constants/app_colors.dart';
-import 'package:my_shop/core/constants/app_sizes.dart';
-import 'package:my_shop/core/constants/app_text_styles.dart';
-import 'package:my_shop/shared/app_text.dart';
+import 'package:my_shop/core/constants/constants.dart';
+
+import 'app_text.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({

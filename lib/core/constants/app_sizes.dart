@@ -15,4 +15,10 @@ abstract final class AppSizes {
   static const double screenPadding = 16;
   static const double inputHeight = 46;
   static const double buttonHeight = 48;
+  static const double headerHeight = 56;
+  static const double bottomNavigationHeight = 72;
+  static const double storyImageSize = 64;
+  static const double storyBlockHeight = 96;
+  static const double bannerHeight = 160;
+  static const double productImageHeight = 180;
 }

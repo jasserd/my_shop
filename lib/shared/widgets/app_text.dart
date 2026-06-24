@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_shop/core/constants/app_text_styles.dart';
+import 'package:my_shop/core/constants/constants.dart';
 
 class AppText extends StatelessWidget {
   const AppText(

@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:my_shop/presentation/bloc/auth/auth_state.dart';
+import 'package:my_shop/presentation/screens/auth/bloc/auth_state.dart';
 
 @injectable
 class AuthCubit extends Cubit<AuthState> {
