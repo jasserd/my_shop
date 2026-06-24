@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
-import 'package:my_shop/presentation/screens/home/widgets/home_content.dart';
+import 'package:my_shop/presentation/screens/favorites/widgets/favorites_content.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
-class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+class FavoritesScreen extends StatelessWidget {
+  const FavoritesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +15,12 @@ class HomeScreen extends StatelessWidget {
       child: Column(
         children: [
           AppHeader(
-            title: localizations.appName,
+            title: localizations.favoritesTitle,
             actionIcon: Icons.person,
             actionTooltip: localizations.profileTooltip,
             onActionPressed: () {},
           ),
-          const Expanded(child: HomeContent()),
+          const Expanded(child: FavoritesContent()),
         ],
       ),
     );

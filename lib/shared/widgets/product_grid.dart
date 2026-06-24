@@ -1,16 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shop/core/constants/constants.dart';
-import 'package:my_shop/core/l10n/app_localizations.dart';
+import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/utils/utils.dart';
 import 'package:my_shop/domain/entities/product.dart';
-import 'package:my_shop/presentation/screens/home/bloc/home_cubit.dart';
-import 'package:my_shop/shared/widgets/widgets.dart';
 
-class PopularProductsGrid extends StatelessWidget {
-  const PopularProductsGrid({required this.products, super.key});
+import 'product_card.dart';
+
+class ProductGrid extends StatelessWidget {
+  const ProductGrid({
+    required this.products,
+    required this.onProductTap,
+    required this.onFavoriteTap,
+    required this.onCartTap,
+    super.key,
+  });
 
   final List<Product> products;
+  final ValueChanged<Product> onProductTap;
+  final ValueChanged<Product> onFavoriteTap;
+  final ValueChanged<Product> onCartTap;
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +39,9 @@ class PopularProductsGrid extends StatelessWidget {
         return ProductCard(
           product: product,
           title: localizations.byKey(product.titleKey),
-          onTap: () {},
-          onFavoriteTap: () {
-            context.read<HomeCubit>().toggleFavorite(product.id);
-          },
-          onCartTap: () {
-            context.read<HomeCubit>().toggleCart(product.id);
-          },
+          onTap: () => onProductTap(product),
+          onFavoriteTap: () => onFavoriteTap(product),
+          onCartTap: () => onCartTap(product),
         );
       }),
     );

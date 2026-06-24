@@ -3,6 +3,8 @@ import 'package:go_router/go_router.dart';
 import 'package:my_shop/core/di/di.dart';
 import 'package:my_shop/presentation/screens/auth/auth_screen.dart';
 import 'package:my_shop/presentation/screens/auth/bloc/auth_cubit.dart';
+import 'package:my_shop/presentation/screens/favorites/bloc/favorites_cubit.dart';
+import 'package:my_shop/presentation/screens/favorites/favorites_screen.dart';
 import 'package:my_shop/presentation/screens/home/bloc/home_cubit.dart';
 import 'package:my_shop/presentation/screens/home/home_screen.dart';
 import 'package:my_shop/presentation/screens/main/main_screen.dart';
@@ -29,6 +31,13 @@ final GoRouter appRouter = GoRouter(
           builder: (context, state) => BlocProvider(
             create: (context) => getIt<HomeCubit>()..load(),
             child: const HomeScreen(),
+          ),
+        ),
+        GoRoute(
+          path: AppRoutes.favorites,
+          builder: (context, state) => BlocProvider(
+            create: (context) => getIt<FavoritesCubit>()..load(),
+            child: const FavoritesScreen(),
           ),
         ),
       ],

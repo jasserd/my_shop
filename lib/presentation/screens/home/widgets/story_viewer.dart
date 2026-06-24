@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
-import 'package:my_shop/core/l10n/app_localizations.dart';
+import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/utils/utils.dart';
 import 'package:my_shop/domain/entities/story.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
@@ -54,7 +54,7 @@ class _StoryViewer extends StatelessWidget {
                     onPressed: () => Navigator.of(context).pop(),
                     tooltip: localizations.closeStoryTooltip,
                     icon: const Icon(
-                      Icons.arrow_forward,
+                      Icons.close,
                       color: AppColors.background,
                     ),
                   ),

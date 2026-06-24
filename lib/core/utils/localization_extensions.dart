@@ -1,4 +1,4 @@
-import 'package:my_shop/core/l10n/app_localizations.dart';
+import 'package:my_shop/core/l10n/l10n.dart';
 
 extension AppLocalizationsKey on AppLocalizations {
   String byKey(String key) => switch (key) {

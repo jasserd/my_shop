@@ -61,7 +61,7 @@ abstract class ProductMockApi {
               'titleKey': 'productCandle',
               'imageUrl': RemoteImages.productCandle,
               'price': 3200,
-              'isFavorite': false,
+              'isFavorite': true,
               'isInCart': false,
             },
             {
@@ -69,7 +69,7 @@ abstract class ProductMockApi {
               'titleKey': 'productLinen',
               'imageUrl': RemoteImages.productLinen,
               'price': 8900,
-              'isFavorite': false,
+              'isFavorite': true,
               'isInCart': false,
             },
             {

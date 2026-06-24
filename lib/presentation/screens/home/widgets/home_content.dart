@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shop/core/constants/constants.dart';
-import 'package:my_shop/core/l10n/app_localizations.dart';
+import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/domain/entities/story.dart';
 import 'package:my_shop/presentation/screens/home/bloc/home_cubit.dart';
 import 'package:my_shop/presentation/screens/home/widgets/banner_carousel.dart';
-import 'package:my_shop/presentation/screens/home/widgets/popular_products_grid.dart';
 import 'package:my_shop/presentation/screens/home/widgets/stories_section.dart';
 import 'package:my_shop/presentation/screens/home/widgets/story_viewer.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
@@ -58,7 +57,16 @@ class _LoadedHomeContent extends StatelessWidget {
             AppSizes.screenPadding,
             AppSizes.spacingXl,
           ),
-          sliver: PopularProductsGrid(products: state.products),
+          sliver: ProductGrid(
+            products: state.products,
+            onProductTap: (product) {},
+            onFavoriteTap: (product) {
+              context.read<HomeCubit>().toggleFavorite(product.id);
+            },
+            onCartTap: (product) {
+              context.read<HomeCubit>().toggleCart(product.id);
+            },
+          ),
         ),
       ],
     );

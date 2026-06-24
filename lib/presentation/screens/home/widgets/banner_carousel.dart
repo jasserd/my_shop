@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
-import 'package:my_shop/core/l10n/app_localizations.dart';
+import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class BannerCarousel extends StatefulWidget {

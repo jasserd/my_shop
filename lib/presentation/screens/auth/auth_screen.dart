@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:my_shop/core/constants/constants.dart';
-import 'package:my_shop/core/l10n/app_localizations.dart';
+import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/navigation/navigation.dart';
 import 'package:my_shop/presentation/screens/auth/bloc/auth_cubit.dart';
 import 'package:my_shop/presentation/screens/auth/bloc/auth_state.dart';

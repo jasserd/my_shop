@@ -30,6 +30,19 @@ class AppLocalizationsRu extends AppLocalizations {
   String get popularTitle => 'Популярное';
 
   @override
+  String get favoritesTitle => 'Избранное';
+
+  @override
+  String get emptyFavoritesTitle => 'Список пуст';
+
+  @override
+  String get emptyFavoritesDescription =>
+      'Сохраняйте товары, которые вам понравились, чтобы вернуться к ним позже.';
+
+  @override
+  String get goShoppingButton => 'Перейти к покупкам';
+
+  @override
   String get storyNew => 'Новинки';
 
   @override

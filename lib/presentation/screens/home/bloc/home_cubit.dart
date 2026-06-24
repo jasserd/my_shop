@@ -52,28 +52,28 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   void toggleFavorite(String productId) {
-    _updateProduct(
-      productId,
-      (product) => product.copyWith(isFavorite: !product.isFavorite),
+    final product = state.products.firstWhere(
+      (product) => product.id == productId,
     );
+    final updatedProduct = _repository.toggleFavorite(product);
+    _replaceProduct(updatedProduct);
   }
 
   void toggleCart(String productId) {
-    _updateProduct(
-      productId,
-      (product) => product.copyWith(isInCart: !product.isInCart),
+    final product = state.products.firstWhere(
+      (product) => product.id == productId,
     );
+    final updatedProduct = _repository.toggleCart(product);
+    _replaceProduct(updatedProduct);
   }
 
-  void _updateProduct(
-    String productId,
-    Product Function(Product product) update,
-  ) {
+  void _replaceProduct(Product updatedProduct) {
     emit(
       state.copyWith(
         products: state.products
             .map(
-              (product) => product.id == productId ? update(product) : product,
+              (product) =>
+                  product.id == updatedProduct.id ? updatedProduct : product,
             )
             .toList(growable: false),
       ),

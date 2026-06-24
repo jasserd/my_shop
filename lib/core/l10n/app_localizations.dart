@@ -136,6 +136,30 @@ abstract class AppLocalizations {
   /// **'Популярное'**
   String get popularTitle;
 
+  /// No description provided for @favoritesTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Избранное'**
+  String get favoritesTitle;
+
+  /// No description provided for @emptyFavoritesTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Список пуст'**
+  String get emptyFavoritesTitle;
+
+  /// No description provided for @emptyFavoritesDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Сохраняйте товары, которые вам понравились, чтобы вернуться к ним позже.'**
+  String get emptyFavoritesDescription;
+
+  /// No description provided for @goShoppingButton.
+  ///
+  /// In ru, this message translates to:
+  /// **'Перейти к покупкам'**
+  String get goShoppingButton;
+
   /// No description provided for @storyNew.
   ///
   /// In ru, this message translates to:

@@ -1,6 +1,6 @@
 abstract final class RemoteImages {
   static const String common =
-      'https://picsum.photos/seed/myshop-common/800/800';
+      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg';
 
   static const String storyNew = common;
   static const String storyDecor = common;
