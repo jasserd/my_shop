@@ -16,54 +16,49 @@ class AuthScreen extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Scaffold(
-      body: KeyboardDismissible(
-        child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              padding: const .all(AppSizes.screenPadding),
-              child: Column(
-                mainAxisSize: .min,
-                children: [
-                  AppText(
-                    localizations.appName,
-                    style: AppTextStyles.h1(),
-                    textAlign: .center,
-                  ),
-                  const SizedBox(height: AppSizes.authTitleBottomSpacing),
-                  Column(
-                    spacing: AppSizes.spacingMd,
-                    children: [
-                      AppTextField(
-                        label: localizations.loginLabel,
-                        hint: localizations.loginHint,
-                        keyboardType: .emailAddress,
-                        onChanged: context.read<AuthCubit>().emailChanged,
-                      ),
-                      AppTextField(
-                        label: localizations.passwordLabel,
-                        hint: localizations.passwordHint,
-                        obscureText: true,
-                        onChanged: context.read<AuthCubit>().passwordChanged,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: AppSizes.spacingXl),
-                  BlocSelector<AuthCubit, AuthState, bool>(
-                    selector: (state) => state.isButtonEnabled,
-                    builder: (context, isButtonEnabled) {
-                      return AppButton(
-                        text: localizations.signInButton,
-                        onPressed: isButtonEnabled
-                            ? () {
-                                FocusManager.instance.primaryFocus?.unfocus();
-                                context.go(AppRoutes.home);
-                              }
-                            : null,
-                      );
-                    },
-                  ),
-                ],
-              ),
+      body: SafeArea(
+        child: Center(
+          child: SingleChildScrollView(
+            padding: const .all(AppSizes.screenPadding),
+            child: Column(
+              mainAxisSize: .min,
+              children: [
+                AppText(
+                  localizations.appName,
+                  style: AppTextStyles.h1(),
+                  textAlign: .center,
+                ),
+                const SizedBox(height: AppSizes.authTitleBottomSpacing),
+                Column(
+                  spacing: AppSizes.spacingMd,
+                  children: [
+                    AppTextField(
+                      label: localizations.loginLabel,
+                      hint: localizations.loginHint,
+                      keyboardType: .emailAddress,
+                      onChanged: context.read<AuthCubit>().emailChanged,
+                    ),
+                    AppTextField(
+                      label: localizations.passwordLabel,
+                      hint: localizations.passwordHint,
+                      obscureText: true,
+                      onChanged: context.read<AuthCubit>().passwordChanged,
+                    ),
+                  ],
+                ),
+                const SizedBox(height: AppSizes.spacingXl),
+                BlocSelector<AuthCubit, AuthState, bool>(
+                  selector: (state) => state.isButtonEnabled,
+                  builder: (context, isButtonEnabled) {
+                    return AppButton(
+                      text: localizations.signInButton,
+                      onPressed: isButtonEnabled
+                          ? () => context.go(AppRoutes.home)
+                          : null,
+                    );
+                  },
+                ),
+              ],
             ),
           ),
         ),

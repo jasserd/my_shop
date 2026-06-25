@@ -24,12 +24,7 @@ class ProductGrid extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return SliverGrid(
-      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: AppSizes.productGridColumnCount,
-        crossAxisSpacing: AppSizes.spacingLg,
-        mainAxisSpacing: AppSizes.spacingXl,
-        mainAxisExtent: AppSizes.productGridItemExtent,
-      ),
+      gridDelegate: _gridDelegate,
       delegate: SliverChildBuilderDelegate(childCount: products.length, (
         context,
         index,
@@ -45,6 +40,15 @@ class ProductGrid extends StatelessWidget {
           onCartTap: () => onCartTap(product),
         );
       }),
+    );
+  }
+
+  SliverGridDelegate get _gridDelegate {
+    return const SliverGridDelegateWithFixedCrossAxisCount(
+      crossAxisCount: AppSizes.productGridColumnCount,
+      crossAxisSpacing: AppSizes.spacingLg,
+      mainAxisSpacing: AppSizes.spacingXl,
+      mainAxisExtent: AppSizes.productGridItemExtent,
     );
   }
 }

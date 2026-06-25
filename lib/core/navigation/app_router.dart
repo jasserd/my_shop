@@ -24,42 +24,58 @@ final appRouter = GoRouter(
         child: const AuthScreen(),
       ),
     ),
-    ShellRoute(
-      builder: (context, state, child) {
-        return MainScreen(child: child);
+    StatefulShellRoute.indexedStack(
+      builder: (context, state, navigationShell) {
+        return MainScreen(navigationShell: navigationShell);
       },
-      routes: [
-        GoRoute(
-          path: AppRoutes.home,
-          builder: (context, state) => BlocProvider(
-            create: (context) => HomeCubit()..load(),
-            child: const HomeScreen(),
-          ),
+      branches: [
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.home,
+              builder: (context, state) => BlocProvider(
+                create: (context) => HomeCubit()..load(),
+                child: const HomeScreen(),
+              ),
+            ),
+          ],
         ),
-        GoRoute(
-          path: AppRoutes.catalog,
-          builder: (context, state) => BlocProvider(
-            create: (context) => CatalogCubit()..load(),
-            child: const CatalogScreen(),
-          ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.catalog,
+              builder: (context, state) => BlocProvider(
+                create: (context) => CatalogCubit()..load(),
+                child: const CatalogScreen(),
+              ),
+            ),
+          ],
         ),
-        GoRoute(
-          path: AppRoutes.favorites,
-          builder: (context, state) => BlocProvider(
-            create: (context) => FavoritesCubit()..load(),
-            child: const FavoritesScreen(),
-          ),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.favorites,
+              builder: (context, state) => BlocProvider(
+                create: (context) => FavoritesCubit()..load(),
+                child: const FavoritesScreen(),
+              ),
+            ),
+          ],
         ),
-        GoRoute(
-          path: AppRoutes.cart,
-          builder: (context, state) => BlocProvider(
-            create: (context) => CartCubit()..load(),
-            child: const CartScreen(),
-          ),
-        ),
-        GoRoute(
-          path: AppRoutes.payment,
-          builder: (context, state) => const PaymentScreen(),
+        StatefulShellBranch(
+          routes: [
+            GoRoute(
+              path: AppRoutes.cart,
+              builder: (context, state) => BlocProvider(
+                create: (context) => CartCubit()..load(),
+                child: const CartScreen(),
+              ),
+            ),
+            GoRoute(
+              path: AppRoutes.payment,
+              builder: (context, state) => const PaymentScreen(),
+            ),
+          ],
         ),
       ],
     ),

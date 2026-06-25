@@ -2,18 +2,24 @@ import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/di/di.dart';
+import 'package:my_shop/core/utils/utils.dart';
 import 'package:my_shop/domain/entities/product.dart';
 import 'package:my_shop/domain/repositories/product_repository.dart';
 import 'package:my_shop/presentation/screens/catalog/bloc/catalog_state.dart';
+import 'package:my_shop/shared/base/base.dart';
 
-class CatalogCubit extends Cubit<CatalogState> {
+class CatalogCubit extends Cubit<CatalogState>
+    with ProductActionsMixin<CatalogState> {
   CatalogCubit() : super(const CatalogState());
 
   final _repository = getIt.get<ProductRepository>();
 
+  @override
+  ProductRepository get productRepository => _repository;
+
   Future<void> load() async {
     emit(state.copyWith(isLoading: true));
-    final categories = await _repository.getCategories();
+    final categories = await productRepository.getCategories();
     emit(state.copyWith(isLoading: false, categories: categories));
   }
 
@@ -26,7 +32,7 @@ class CatalogCubit extends Cubit<CatalogState> {
 
     _emitCategoryStates({...categoryStates, categoryId: const CategoryState()});
 
-    final products = await _repository.getCategoryProducts(categoryId);
+    final products = await productRepository.getCategoryProducts(categoryId);
     if (state.categoryStates.containsKey(categoryId) == false) {
       return;
     }
@@ -84,30 +90,20 @@ class CatalogCubit extends Cubit<CatalogState> {
     });
   }
 
-  void toggleFavorite(String categoryId, Product product) {
-    final updatedProduct = _repository.toggleFavorite(product);
-    _replaceProduct(categoryId, updatedProduct);
-  }
+  @override
+  void onProductAction(
+    Product updatedProduct, {
+    required ProductAction action,
+    String? scopeId,
+  }) {
+    if (scopeId == null) {
+      return;
+    }
 
-  void toggleCart(String categoryId, Product product) {
-    final updatedProduct = _repository.toggleCart(product);
-    _replaceProduct(categoryId, updatedProduct);
-  }
-
-  void _replaceProduct(String categoryId, Product updatedProduct) {
-    _updateCategory(categoryId, (categoryState) {
-      List<Product> replace(List<Product> products) {
-        return products
-            .map(
-              (product) =>
-                  product.id == updatedProduct.id ? updatedProduct : product,
-            )
-            .toList(growable: false);
-      }
-
+    _updateCategory(scopeId, (categoryState) {
       return categoryState.copyWith(
-        products: replace(categoryState.products),
-        allProducts: replace(categoryState.allProducts),
+        products: categoryState.products.replaceById(updatedProduct),
+        allProducts: categoryState.allProducts.replaceById(updatedProduct),
       );
     });
   }

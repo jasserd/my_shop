@@ -21,30 +21,7 @@ class AppButton extends StatelessWidget {
       height: AppSizes.buttonHeight,
       child: ElevatedButton(
         onPressed: isLoading ? null : onPressed,
-        style: ButtonStyle(
-          elevation: const WidgetStatePropertyAll(0),
-          backgroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return AppColors.border;
-            }
-            if (states.contains(WidgetState.pressed)) {
-              return AppColors.primaryPressed;
-            }
-            return AppColors.primary;
-          }),
-          foregroundColor: WidgetStateProperty.resolveWith((states) {
-            if (states.contains(WidgetState.disabled)) {
-              return AppColors.textSecondary;
-            }
-            return AppColors.background;
-          }),
-          shape: const WidgetStatePropertyAll(
-            RoundedRectangleBorder(
-              borderRadius: .all(.circular(AppSizes.radiusMedium)),
-            ),
-          ),
-          textStyle: WidgetStatePropertyAll(AppTextStyles.button()),
-        ),
+        style: _buttonStyle,
         child: isLoading
             ? const SizedBox.square(
                 dimension: AppSizes.buttonLoaderSize,
@@ -63,5 +40,36 @@ class AppButton extends StatelessWidget {
               ),
       ),
     );
+  }
+
+  ButtonStyle get _buttonStyle {
+    return ButtonStyle(
+      elevation: const WidgetStatePropertyAll(0),
+      backgroundColor: WidgetStateProperty.resolveWith(_backgroundColor),
+      foregroundColor: WidgetStateProperty.resolveWith(_foregroundColor),
+      shape: const WidgetStatePropertyAll(
+        RoundedRectangleBorder(
+          borderRadius: .all(.circular(AppSizes.radiusMedium)),
+        ),
+      ),
+      textStyle: WidgetStatePropertyAll(AppTextStyles.button()),
+    );
+  }
+
+  Color _backgroundColor(Set<WidgetState> states) {
+    if (states.contains(WidgetState.disabled)) {
+      return AppColors.border;
+    }
+    if (states.contains(WidgetState.pressed)) {
+      return AppColors.primaryPressed;
+    }
+    return AppColors.primary;
+  }
+
+  Color _foregroundColor(Set<WidgetState> states) {
+    if (states.contains(WidgetState.disabled)) {
+      return AppColors.textSecondary;
+    }
+    return AppColors.background;
   }
 }

@@ -25,10 +25,7 @@ class CartCheckoutPanel extends StatelessWidget {
 
     return Container(
       padding: const .all(AppSizes.spacingLg),
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.border)),
-      ),
+      decoration: _panelDecoration,
       child: Column(
         spacing: AppSizes.spacingMd,
         mainAxisSize: .min,
@@ -53,6 +50,13 @@ class CartCheckoutPanel extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  BoxDecoration get _panelDecoration {
+    return const BoxDecoration(
+      color: AppColors.surface,
+      border: Border(top: BorderSide(color: AppColors.border)),
     );
   }
 }

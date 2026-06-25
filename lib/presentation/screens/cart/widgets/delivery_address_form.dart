@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
-import 'package:my_shop/presentation/screens/cart/bloc/cart_cubit.dart';
+import 'package:my_shop/domain/entities/delivery_address.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class DeliveryAddressForm extends StatelessWidget {
-  const DeliveryAddressForm({required this.cartCubit, super.key});
+  const DeliveryAddressForm({
+    required this.deliveryAddress,
+    required this.onChanged,
+    super.key,
+  });
 
-  final CartCubit cartCubit;
+  final DeliveryAddress deliveryAddress;
+  final ValueChanged<DeliveryAddress> onChanged;
 
   @override
   Widget build(BuildContext context) {
@@ -21,12 +26,16 @@ class DeliveryAddressForm extends StatelessWidget {
         AppTextField(
           label: localizations.cityLabel,
           hint: localizations.cityHint,
-          onChanged: cartCubit.cityChanged,
+          onChanged: (value) {
+            onChanged(deliveryAddress.copyWith(city: value));
+          },
         ),
         AppTextField(
           label: localizations.streetLabel,
           hint: localizations.streetHint,
-          onChanged: cartCubit.streetChanged,
+          onChanged: (value) {
+            onChanged(deliveryAddress.copyWith(street: value));
+          },
         ),
         Row(
           spacing: AppSizes.spacingMd,
@@ -37,7 +46,9 @@ class DeliveryAddressForm extends StatelessWidget {
                 label: localizations.houseLabel,
                 hint: localizations.houseHint,
                 keyboardType: .number,
-                onChanged: cartCubit.houseChanged,
+                onChanged: (value) {
+                  onChanged(deliveryAddress.copyWith(house: value));
+                },
               ),
             ),
             Expanded(
@@ -45,7 +56,9 @@ class DeliveryAddressForm extends StatelessWidget {
                 label: localizations.apartmentLabel,
                 hint: localizations.apartmentHint,
                 keyboardType: .number,
-                onChanged: cartCubit.apartmentChanged,
+                onChanged: (value) {
+                  onChanged(deliveryAddress.copyWith(apartment: value));
+                },
               ),
             ),
           ],
@@ -54,7 +67,9 @@ class DeliveryAddressForm extends StatelessWidget {
           label: localizations.postalCodeLabel,
           hint: localizations.postalCodeHint,
           keyboardType: .number,
-          onChanged: cartCubit.indexChanged,
+          onChanged: (value) {
+            onChanged(deliveryAddress.copyWith(postalCode: value));
+          },
         ),
       ],
     );

@@ -32,35 +32,47 @@ class AppTextField extends StatelessWidget {
             obscureText: obscureText,
             keyboardType: keyboardType,
             cursorColor: AppColors.primary,
+            onTapOutside: (_) => FocusManager.instance.primaryFocus?.unfocus(),
             style: AppTextStyles.bodyRegular(),
-            decoration: InputDecoration(
-              hintText: hint,
-              hintStyle: AppTextStyles.bodyRegular(
-                color: AppColors.textSecondary,
-              ),
-              filled: true,
-              fillColor: AppColors.surface,
-              contentPadding: const .symmetric(horizontal: AppSizes.spacingLg),
-              enabledBorder: const OutlineInputBorder(
-                borderRadius: .all(.circular(AppSizes.radiusMedium)),
-                borderSide: BorderSide(color: AppColors.border),
-              ),
-              focusedBorder: const OutlineInputBorder(
-                borderRadius: .all(.circular(AppSizes.radiusMedium)),
-                borderSide: BorderSide(color: AppColors.primary),
-              ),
-              errorBorder: const OutlineInputBorder(
-                borderRadius: .all(.circular(AppSizes.radiusMedium)),
-                borderSide: BorderSide(color: AppColors.error),
-              ),
-              focusedErrorBorder: const OutlineInputBorder(
-                borderRadius: .all(.circular(AppSizes.radiusMedium)),
-                borderSide: BorderSide(color: AppColors.error),
-              ),
-            ),
+            decoration: _inputDecoration,
           ),
         ),
       ],
+    );
+  }
+
+  InputDecoration get _inputDecoration {
+    return InputDecoration(
+      hintText: hint,
+      hintStyle: AppTextStyles.bodyRegular(color: AppColors.textSecondary),
+      filled: true,
+      fillColor: AppColors.surface,
+      contentPadding: const .symmetric(horizontal: AppSizes.spacingLg),
+      enabledBorder: _enabledBorder,
+      focusedBorder: _focusedBorder,
+      errorBorder: _errorBorder,
+      focusedErrorBorder: _errorBorder,
+    );
+  }
+
+  OutlineInputBorder get _enabledBorder {
+    return const OutlineInputBorder(
+      borderRadius: .all(.circular(AppSizes.radiusMedium)),
+      borderSide: BorderSide(color: AppColors.border),
+    );
+  }
+
+  OutlineInputBorder get _focusedBorder {
+    return const OutlineInputBorder(
+      borderRadius: .all(.circular(AppSizes.radiusMedium)),
+      borderSide: BorderSide(color: AppColors.primary),
+    );
+  }
+
+  OutlineInputBorder get _errorBorder {
+    return const OutlineInputBorder(
+      borderRadius: .all(.circular(AppSizes.radiusMedium)),
+      borderSide: BorderSide(color: AppColors.error),
     );
   }
 }

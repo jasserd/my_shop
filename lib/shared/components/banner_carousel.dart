@@ -133,12 +133,16 @@ class _PageIndicator extends StatelessWidget {
               : AppSizes.bannerIndicatorInactiveWidth,
           height: AppSizes.bannerIndicatorHeight,
           margin: const .symmetric(horizontal: AppSizes.bannerIndicatorSpacing),
-          decoration: BoxDecoration(
-            color: index == activeIndex ? AppColors.primary : AppColors.border,
-            borderRadius: const .all(.circular(AppSizes.radiusFull)),
-          ),
+          decoration: _indicatorDecoration(index),
         ),
       ),
+    );
+  }
+
+  BoxDecoration _indicatorDecoration(int index) {
+    return BoxDecoration(
+      color: index == activeIndex ? AppColors.primary : AppColors.border,
+      borderRadius: const .all(.circular(AppSizes.radiusFull)),
     );
   }
 }

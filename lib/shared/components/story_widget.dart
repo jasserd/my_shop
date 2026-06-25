@@ -29,17 +29,7 @@ class StoryWidget extends StatelessWidget {
               width: AppSizes.storyImageSize + AppSizes.storyRingSizeOffset,
               height: AppSizes.storyImageSize + AppSizes.storyRingSizeOffset,
               padding: const .all(AppSizes.storyRingPadding),
-              decoration: BoxDecoration(
-                shape: .circle,
-                border: Border.all(
-                  color: story.isViewed == true
-                      ? AppColors.border
-                      : AppColors.primary,
-                  width: story.isViewed == true
-                      ? AppSizes.borderThin
-                      : AppSizes.borderRegular,
-                ),
-              ),
+              decoration: _storyDecoration,
               child: ClipOval(
                 child: AppNetworkImage(
                   imageUrl: story.imageUrl ?? AppSettings.emptyString,
@@ -56,6 +46,18 @@ class StoryWidget extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  BoxDecoration get _storyDecoration {
+    return BoxDecoration(
+      shape: .circle,
+      border: Border.all(
+        color: story.isViewed == true ? AppColors.border : AppColors.primary,
+        width: story.isViewed == true
+            ? AppSizes.borderThin
+            : AppSizes.borderRegular,
       ),
     );
   }

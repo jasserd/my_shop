@@ -25,10 +25,7 @@ class CustomBottomNavBar extends StatelessWidget {
 
     return Container(
       height: AppSizes.bottomNavigationHeight,
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        border: Border(top: BorderSide(color: AppColors.border)),
-      ),
+      decoration: _navigationDecoration,
       child: SafeArea(
         top: false,
         child: Row(
@@ -44,6 +41,13 @@ class CustomBottomNavBar extends StatelessWidget {
           }),
         ),
       ),
+    );
+  }
+
+  BoxDecoration get _navigationDecoration {
+    return const BoxDecoration(
+      color: AppColors.surface,
+      border: Border(top: BorderSide(color: AppColors.border)),
     );
   }
 }
@@ -69,14 +73,8 @@ class _NavigationItem extends StatelessWidget {
       onTap: onTap,
       borderRadius: const .all(.circular(AppSizes.radiusLarge)),
       child: Container(
-        padding: const .symmetric(
-          horizontal: AppSizes.spacingMd,
-          vertical: AppSizes.spacingXs,
-        ),
-        decoration: BoxDecoration(
-          color: isSelected ? AppColors.border : AppColors.surface,
-          borderRadius: const .all(.circular(AppSizes.radiusLarge)),
-        ),
+        padding: const .symmetric(horizontal: AppSizes.spacingMd),
+        decoration: _itemDecoration,
         child: Column(
           spacing: AppSizes.spacingXs,
           mainAxisSize: .min,
@@ -86,6 +84,13 @@ class _NavigationItem extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+
+  BoxDecoration get _itemDecoration {
+    return BoxDecoration(
+      color: isSelected ? AppColors.border : AppColors.surface,
+      borderRadius: const .all(.circular(AppSizes.radiusLarge)),
     );
   }
 }

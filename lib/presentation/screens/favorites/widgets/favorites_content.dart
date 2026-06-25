@@ -31,7 +31,7 @@ class FavoritesContent extends StatelessWidget {
                 products: state.favorites,
                 onProductTap: (product) {},
                 onFavoriteTap: (product) {
-                  context.read<FavoritesCubit>().removeFromFavorites(product);
+                  context.read<FavoritesCubit>().toggleFavorite(product);
                 },
                 onCartTap: (product) {
                   context.read<FavoritesCubit>().toggleCart(product);

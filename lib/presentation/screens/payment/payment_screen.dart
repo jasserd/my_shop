@@ -53,15 +53,7 @@ class _PaymentSuccessContent extends StatelessWidget {
               width: AppSizes.paymentSuccessOuterSize,
               height: AppSizes.paymentSuccessOuterSize,
               alignment: .center,
-              decoration: BoxDecoration(
-                shape: .circle,
-                border: Border.all(
-                  color: AppColors.success.withValues(
-                    alpha: AppOpacities.successBorder,
-                  ),
-                  width: AppSizes.borderRegular,
-                ),
-              ),
+              decoration: _successDecoration,
               child: const CircleAvatar(
                 radius: AppSizes.paymentSuccessIconRadius,
                 backgroundColor: AppColors.success,
@@ -87,6 +79,16 @@ class _PaymentSuccessContent extends StatelessWidget {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  BoxDecoration get _successDecoration {
+    return BoxDecoration(
+      shape: .circle,
+      border: Border.all(
+        color: AppColors.success.withValues(alpha: AppOpacities.successBorder),
+        width: AppSizes.borderRegular,
       ),
     );
   }

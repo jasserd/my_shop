@@ -126,10 +126,13 @@ class _CategoryList extends StatelessWidget {
         products: categoryState.products,
         onProductTap: (product) {},
         onFavoriteTap: (product) {
-          context.read<CatalogCubit>().toggleFavorite(categoryId, product);
+          context.read<CatalogCubit>().toggleFavorite(
+            product,
+            scopeId: categoryId,
+          );
         },
         onCartTap: (product) {
-          context.read<CatalogCubit>().toggleCart(categoryId, product);
+          context.read<CatalogCubit>().toggleCart(product, scopeId: categoryId);
         },
       ),
     );

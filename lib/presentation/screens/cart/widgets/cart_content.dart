@@ -51,7 +51,10 @@ class _FilledCart extends StatelessWidget {
     }
     cartChildren.addAll([
       const SizedBox(height: AppSizes.spacingMd),
-      DeliveryAddressForm(cartCubit: cartCubit),
+      DeliveryAddressForm(
+        deliveryAddress: state.deliveryAddress,
+        onChanged: cartCubit.deliveryAddressChanged,
+      ),
     ]);
 
     return Stack(

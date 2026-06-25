@@ -81,10 +81,7 @@ class _SortTag extends StatelessWidget {
           height: AppSizes.sortTagHeight,
           alignment: .center,
           padding: const .symmetric(horizontal: AppSizes.spacingLg),
-          decoration: BoxDecoration(
-            border: isSelected ? null : Border.all(color: AppColors.border),
-            borderRadius: const .all(.circular(AppSizes.radiusFull)),
-          ),
+          decoration: _tagDecoration,
           child: Row(
             spacing: AppSizes.spacingXs,
             mainAxisSize: .min,
@@ -101,6 +98,13 @@ class _SortTag extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  BoxDecoration get _tagDecoration {
+    return BoxDecoration(
+      border: isSelected ? null : Border.all(color: AppColors.border),
+      borderRadius: const .all(.circular(AppSizes.radiusFull)),
     );
   }
 }

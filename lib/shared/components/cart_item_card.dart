@@ -30,11 +30,7 @@ class CartItemCard extends StatelessWidget {
     return Container(
       height: AppSizes.cartItemHeight,
       padding: const .all(AppSizes.spacingSm),
-      decoration: BoxDecoration(
-        color: AppColors.background,
-        border: Border.all(color: AppColors.border),
-        borderRadius: const .all(.circular(AppSizes.radiusMedium)),
-      ),
+      decoration: _cardDecoration,
       child: Row(
         spacing: AppSizes.spacingMd,
         children: [
@@ -77,6 +73,14 @@ class CartItemCard extends StatelessWidget {
       ),
     );
   }
+
+  BoxDecoration get _cardDecoration {
+    return BoxDecoration(
+      color: AppColors.background,
+      border: Border.all(color: AppColors.border),
+      borderRadius: const .all(.circular(AppSizes.radiusMedium)),
+    );
+  }
 }
 
 class _QuantityControl extends StatelessWidget {
@@ -95,10 +99,7 @@ class _QuantityControl extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Container(
-      decoration: const BoxDecoration(
-        color: AppColors.surface,
-        borderRadius: .all(.circular(AppSizes.radiusMedium)),
-      ),
+      decoration: _decoration,
       child: Row(
         mainAxisSize: .min,
         children: [
@@ -117,6 +118,13 @@ class _QuantityControl extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+
+  BoxDecoration get _decoration {
+    return const BoxDecoration(
+      color: AppColors.surface,
+      borderRadius: .all(.circular(AppSizes.radiusMedium)),
     );
   }
 }

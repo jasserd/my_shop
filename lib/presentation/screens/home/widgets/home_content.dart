@@ -64,14 +64,10 @@ class _LoadedHomeContent extends StatelessWidget {
             products: state.products,
             onProductTap: (product) {},
             onFavoriteTap: (product) {
-              context.read<HomeCubit>().toggleFavorite(
-                product.id ?? AppSettings.emptyString,
-              );
+              context.read<HomeCubit>().toggleFavorite(product);
             },
             onCartTap: (product) {
-              context.read<HomeCubit>().toggleCart(
-                product.id ?? AppSettings.emptyString,
-              );
+              context.read<HomeCubit>().toggleCart(product);
             },
           ),
         ),

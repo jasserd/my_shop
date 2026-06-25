@@ -3,6 +3,7 @@ import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/data/api/product_mock_api.dart';
 import 'package:my_shop/domain/entities/cart_item.dart';
 import 'package:my_shop/domain/entities/category.dart';
+import 'package:my_shop/domain/entities/home_feed.dart';
 import 'package:my_shop/domain/entities/product.dart';
 import 'package:my_shop/domain/entities/promo_banner.dart';
 import 'package:my_shop/domain/entities/story.dart';
@@ -31,20 +32,15 @@ class ProductRepository {
     return (
       stories: response.stories ?? const [],
       banners: response.banners ?? const [],
-      products: (response.products ?? const [])
-          .map(_applyOverrides)
-          .toList(growable: false),
+      products: await _getHomeProducts(response),
     );
   }
 
   Future<List<Product>> getFavorites() async {
-    final response = await _api.getHome();
+    final products = await _getHomeProducts();
 
     return List.unmodifiable(
-      response.products
-              ?.map(_applyOverrides)
-              .where((product) => product.isFavorite == true) ??
-          const [],
+      products.where((product) => product.isFavorite == true),
     );
   }
 
@@ -58,8 +54,7 @@ class ProductRepository {
   }
 
   Future<List<CartItem>> getCartItems() async {
-    final response = await _api.getHome();
-    final homeProducts = (response.products ?? const []).map(_applyOverrides);
+    final homeProducts = await _getHomeProducts();
     final products = <String, Product>{};
 
     for (final product in homeProducts) {
@@ -148,5 +143,12 @@ class ProductRepository {
       isFavorite: _favoriteOverrides[productId] ?? product.isFavorite ?? false,
       isInCart: _cartOverrides[productId] ?? product.isInCart ?? false,
     );
+  }
+
+  Future<List<Product>> _getHomeProducts([HomeFeed? homeFeed]) async {
+    final response = homeFeed ?? await _api.getHome();
+    return (response.products ?? const [])
+        .map(_applyOverrides)
+        .toList(growable: false);
   }
 }
