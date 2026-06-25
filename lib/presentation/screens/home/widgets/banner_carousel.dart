@@ -83,7 +83,11 @@ class _BannerItem extends StatelessWidget {
         fit: .expand,
         children: [
           AppNetworkImage(imageUrl: banner.imageUrl, fit: .cover),
-          ColoredBox(color: AppColors.surface.withValues(alpha: 0.62)),
+          ColoredBox(
+            color: AppColors.surface.withValues(
+              alpha: AppOpacities.bannerOverlay,
+            ),
+          ),
           Padding(
             padding: const .all(AppSizes.spacingXl),
             child: Row(
@@ -132,10 +136,12 @@ class _PageIndicator extends StatelessWidget {
       children: List.generate(
         itemCount,
         (index) => AnimatedContainer(
-          duration: const Duration(milliseconds: 200),
-          width: index == activeIndex ? 12 : 6,
-          height: 6,
-          margin: const .symmetric(horizontal: 2),
+          duration: AppSettings.shortAnimationDuration,
+          width: index == activeIndex
+              ? AppSizes.bannerIndicatorActiveWidth
+              : AppSizes.bannerIndicatorInactiveWidth,
+          height: AppSizes.bannerIndicatorHeight,
+          margin: const .symmetric(horizontal: AppSizes.bannerIndicatorSpacing),
           decoration: BoxDecoration(
             color: index == activeIndex ? AppColors.primary : AppColors.border,
             borderRadius: const .all(.circular(AppSizes.radiusFull)),

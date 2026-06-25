@@ -1,4 +1,5 @@
 import 'package:injectable/injectable.dart';
+import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/data/api/product_mock_api.dart';
 import 'package:my_shop/domain/entities/cart_item.dart';
 import 'package:my_shop/domain/entities/category.dart';
@@ -12,7 +13,12 @@ class ProductRepository {
   final ProductMockApi _api;
   final Map<String, bool> _favoriteOverrides = {};
   final Map<String, bool> _cartOverrides = {};
-  final Map<String, int> _cartQuantities = {'product-1': 1, 'product-4': 2};
+  final Map<String, int> _cartQuantities = {
+    MockDataConstants.initialCartFirstProductId:
+        MockDataConstants.initialCartFirstQuantity,
+    MockDataConstants.initialCartSecondProductId:
+        MockDataConstants.initialCartSecondQuantity,
+  };
   final Map<String, Product> _addedCartProducts = {};
 
   Future<({List<Story> stories, List<Product> products})> getHome() async {
@@ -58,7 +64,8 @@ class ProductRepository {
         .map(
           (product) => CartItem(
             product: product,
-            quantity: _cartQuantities[product.id] ?? 1,
+            quantity:
+                _cartQuantities[product.id] ?? AppSettings.defaultCartQuantity,
           ),
         )
         .toList(growable: false);
@@ -74,7 +81,10 @@ class ProductRepository {
     final updatedProduct = product.copyWith(isInCart: !product.isInCart);
     _cartOverrides[product.id] = updatedProduct.isInCart;
     if (updatedProduct.isInCart) {
-      _cartQuantities.putIfAbsent(product.id, () => 1);
+      _cartQuantities.putIfAbsent(
+        product.id,
+        () => AppSettings.defaultCartQuantity,
+      );
       _addedCartProducts[product.id] = updatedProduct;
     } else {
       _cartQuantities.remove(product.id);
@@ -84,14 +94,14 @@ class ProductRepository {
   }
 
   CartItem incrementCartItem(CartItem cartItem) {
-    final quantity = cartItem.quantity + 1;
+    final quantity = cartItem.quantity + AppSettings.defaultCartQuantity;
     _cartQuantities[cartItem.product.id] = quantity;
     return cartItem.copyWith(quantity: quantity);
   }
 
   CartItem? decrementCartItem(CartItem cartItem) {
-    final quantity = cartItem.quantity - 1;
-    if (quantity <= 0) {
+    final quantity = cartItem.quantity - AppSettings.defaultCartQuantity;
+    if (quantity <= AppSettings.minimumCartQuantity) {
       _cartQuantities.remove(cartItem.product.id);
       _cartOverrides[cartItem.product.id] = false;
       _addedCartProducts.remove(cartItem.product.id);

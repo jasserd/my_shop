@@ -20,21 +20,23 @@ class StoryWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 76,
+      width: AppSizes.storyItemWidth,
       child: InkWell(
         onTap: onTap,
         borderRadius: const .all(.circular(AppSizes.radiusMedium)),
         child: Column(
           children: [
             Container(
-              width: AppSizes.storyImageSize + 6,
-              height: AppSizes.storyImageSize + 6,
-              padding: const .all(2),
+              width: AppSizes.storyImageSize + AppSizes.storyRingSizeOffset,
+              height: AppSizes.storyImageSize + AppSizes.storyRingSizeOffset,
+              padding: const .all(AppSizes.storyRingPadding),
               decoration: BoxDecoration(
                 shape: .circle,
                 border: Border.all(
                   color: story.isViewed ? AppColors.border : AppColors.primary,
-                  width: story.isViewed ? 1 : 2,
+                  width: story.isViewed
+                      ? AppSizes.borderThin
+                      : AppSizes.borderRegular,
                 ),
               ),
               child: ClipOval(
@@ -47,7 +49,7 @@ class StoryWidget extends StatelessWidget {
               style: AppTextStyles.caption.copyWith(
                 color: AppColors.textPrimary,
               ),
-              maxLines: 1,
+              maxLines: AppSizes.storyTitleMaxLines,
               overflow: .ellipsis,
               textAlign: .center,
             ),

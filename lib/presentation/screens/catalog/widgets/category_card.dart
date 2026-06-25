@@ -26,7 +26,7 @@ class CategoryCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: const .all(.circular(AppSizes.radiusMedium)),
         child: SizedBox(
-          height: 64,
+          height: AppSizes.categoryCardHeight,
           child: Padding(
             padding: const .symmetric(horizontal: AppSizes.spacingLg),
             child: Row(
@@ -34,7 +34,7 @@ class CategoryCard extends StatelessWidget {
                 Icon(
                   _iconFor(category.icon),
                   color: AppColors.primary,
-                  size: 24,
+                  size: AppSizes.categoryCardIconSize,
                 ),
                 const SizedBox(width: AppSizes.spacingMd),
                 Expanded(child: AppText(title, style: AppTextStyles.bodyLarge)),

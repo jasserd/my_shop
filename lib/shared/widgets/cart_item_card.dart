@@ -24,10 +24,12 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final product = cartItem.product;
-    final price = NumberFormat.decimalPattern('ru').format(product.price);
+    final price = NumberFormat.decimalPattern(
+      AppSettings.numberFormatLocale,
+    ).format(product.price);
 
     return Container(
-      height: 90,
+      height: AppSizes.cartItemHeight,
       padding: const .all(AppSizes.spacingSm),
       decoration: BoxDecoration(
         color: AppColors.background,
@@ -40,8 +42,8 @@ class CartItemCard extends StatelessWidget {
             borderRadius: const .all(.circular(AppSizes.radiusSmall)),
             child: AppNetworkImage(
               imageUrl: product.imageUrl,
-              width: 72,
-              height: 72,
+              width: AppSizes.cartItemImageSize,
+              height: AppSizes.cartItemImageSize,
               fit: .cover,
             ),
           ),
@@ -54,7 +56,7 @@ class CartItemCard extends StatelessWidget {
                 AppText(
                   localizations.byKey(product.titleKey),
                   style: AppTextStyles.bodyRegular,
-                  maxLines: 2,
+                  maxLines: AppSizes.productTitleMaxLines,
                   overflow: .ellipsis,
                 ),
                 const SizedBox(height: AppSizes.spacingXs),

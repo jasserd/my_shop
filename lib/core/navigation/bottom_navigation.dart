@@ -1,22 +1,23 @@
 import 'app_routes.dart';
+import 'bottom_navigation_constants.dart';
 
 abstract final class BottomNavigation {
   static int selectedIndex(String location) {
     return switch (location) {
-      AppRoutes.home => 0,
-      AppRoutes.catalog => 1,
-      AppRoutes.favorites => 2,
-      AppRoutes.cart || AppRoutes.payment => 3,
-      _ => 0,
+      AppRoutes.home => BottomNavigationIndexes.home,
+      AppRoutes.catalog => BottomNavigationIndexes.catalog,
+      AppRoutes.favorites => BottomNavigationIndexes.favorites,
+      AppRoutes.cart || AppRoutes.payment => BottomNavigationIndexes.cart,
+      _ => BottomNavigationIndexes.home,
     };
   }
 
   static String? routeForIndex(int index) {
     return switch (index) {
-      0 => AppRoutes.home,
-      1 => AppRoutes.catalog,
-      2 => AppRoutes.favorites,
-      3 => AppRoutes.cart,
+      BottomNavigationIndexes.home => AppRoutes.home,
+      BottomNavigationIndexes.catalog => AppRoutes.catalog,
+      BottomNavigationIndexes.favorites => AppRoutes.favorites,
+      BottomNavigationIndexes.cart => AppRoutes.cart,
       _ => null,
     };
   }

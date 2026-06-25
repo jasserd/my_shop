@@ -59,7 +59,7 @@ class _EmptyFavorites extends StatelessWidget {
           children: [
             const Icon(
               Icons.favorite_border,
-              size: 64,
+              size: AppSizes.emptyStateIconSize,
               color: AppColors.border,
             ),
             const SizedBox(height: AppSizes.spacingXl),

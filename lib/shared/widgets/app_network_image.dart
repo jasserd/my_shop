@@ -32,7 +32,7 @@ class AppNetworkImage extends StatelessWidget {
           child: Center(
             child: CircularProgressIndicator(
               color: AppColors.primary,
-              strokeWidth: 2,
+              strokeWidth: AppSizes.loaderStrokeWidth,
             ),
           ),
         );

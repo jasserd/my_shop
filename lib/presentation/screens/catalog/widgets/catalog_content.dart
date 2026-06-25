@@ -89,7 +89,10 @@ class _CategoryList extends StatelessWidget {
         ),
         if (categoryState.isLoading)
           const SliverToBoxAdapter(
-            child: SizedBox(height: 180, child: AppLoader()),
+            child: SizedBox(
+              height: AppSizes.categoryLoaderHeight,
+              child: AppLoader(),
+            ),
           )
         else
           SliverPadding(

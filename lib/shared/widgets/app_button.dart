@@ -48,10 +48,10 @@ class AppButton extends StatelessWidget {
         ),
         child: isLoading
             ? const SizedBox.square(
-                dimension: 20,
+                dimension: AppSizes.buttonLoaderSize,
                 child: CircularProgressIndicator(
                   color: AppColors.background,
-                  strokeWidth: 2,
+                  strokeWidth: AppSizes.loaderStrokeWidth,
                 ),
               )
             : AppText(

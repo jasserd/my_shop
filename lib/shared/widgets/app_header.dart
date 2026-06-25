@@ -37,13 +37,20 @@ class AppHeader extends StatelessWidget {
                   IconButton(
                     onPressed: onActionPressed,
                     tooltip: actionTooltip,
-                    icon: Icon(icon, color: AppColors.textPrimary, size: 28),
+                    icon: Icon(
+                      icon,
+                      color: AppColors.textPrimary,
+                      size: AppSizes.headerActionIconSize,
+                    ),
                   ),
               ],
             ),
           ),
         ),
-        const Divider(height: 1, color: AppColors.border),
+        const Divider(
+          height: AppSizes.dividerThickness,
+          color: AppColors.border,
+        ),
       ],
     );
   }

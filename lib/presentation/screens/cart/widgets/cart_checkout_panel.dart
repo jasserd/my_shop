@@ -19,7 +19,9 @@ class CartCheckoutPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final price = NumberFormat.decimalPattern('ru').format(totalPrice);
+    final price = NumberFormat.decimalPattern(
+      AppSettings.numberFormatLocale,
+    ).format(totalPrice);
 
     return Container(
       padding: const .all(AppSizes.spacingLg),

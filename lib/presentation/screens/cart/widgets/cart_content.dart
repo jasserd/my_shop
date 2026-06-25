@@ -46,7 +46,7 @@ class _FilledCart extends StatelessWidget {
             AppSizes.screenPadding,
             AppSizes.spacingLg,
             AppSizes.screenPadding,
-            144,
+            AppSizes.cartCheckoutPanelSpace,
           ),
           child: Column(
             children: [
@@ -96,7 +96,7 @@ class _EmptyCart extends StatelessWidget {
           children: [
             const Icon(
               Icons.shopping_cart_outlined,
-              size: 64,
+              size: AppSizes.emptyStateIconSize,
               color: AppColors.border,
             ),
             const SizedBox(height: AppSizes.spacingXl),

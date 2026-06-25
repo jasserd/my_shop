@@ -49,20 +49,26 @@ class _PaymentSuccessContent extends StatelessWidget {
           mainAxisSize: .min,
           children: [
             Container(
-              width: 96,
-              height: 96,
+              width: AppSizes.paymentSuccessOuterSize,
+              height: AppSizes.paymentSuccessOuterSize,
               alignment: .center,
               decoration: BoxDecoration(
                 shape: .circle,
                 border: Border.all(
-                  color: AppColors.success.withValues(alpha: 0.25),
-                  width: 2,
+                  color: AppColors.success.withValues(
+                    alpha: AppOpacities.successBorder,
+                  ),
+                  width: AppSizes.borderRegular,
                 ),
               ),
               child: const CircleAvatar(
-                radius: 24,
+                radius: AppSizes.paymentSuccessIconRadius,
                 backgroundColor: AppColors.success,
-                child: Icon(Icons.check, color: AppColors.background, size: 32),
+                child: Icon(
+                  Icons.check,
+                  color: AppColors.background,
+                  size: AppSizes.paymentSuccessIconSize,
+                ),
               ),
             ),
             const SizedBox(height: AppSizes.spacingXxl),
@@ -79,7 +85,7 @@ class _PaymentSuccessContent extends StatelessWidget {
               ),
               textAlign: .center,
             ),
-            const SizedBox(height: 40),
+            const SizedBox(height: AppSizes.spacingXxxl),
             AppButton(
               text: localizations.goShoppingButton,
               onPressed: onGoHome,

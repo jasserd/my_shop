@@ -24,7 +24,7 @@ class CategorySortTags extends StatelessWidget {
         activeSort != CatalogSortType.alphabetDescending;
 
     return SizedBox(
-      height: 40,
+      height: AppSizes.sortTagsViewportHeight,
       child: ListView(
         scrollDirection: .horizontal,
         children: [
@@ -78,7 +78,7 @@ class _SortTag extends StatelessWidget {
         onTap: onTap,
         borderRadius: const .all(.circular(AppSizes.radiusFull)),
         child: Container(
-          height: 32,
+          height: AppSizes.sortTagHeight,
           alignment: .center,
           padding: const .symmetric(horizontal: AppSizes.spacingLg),
           decoration: BoxDecoration(
@@ -96,7 +96,11 @@ class _SortTag extends StatelessWidget {
               ),
               if (icon case final icon?) ...[
                 const SizedBox(width: AppSizes.spacingXs),
-                Icon(icon, color: foregroundColor, size: 16),
+                Icon(
+                  icon,
+                  color: foregroundColor,
+                  size: AppSizes.sortTagIconSize,
+                ),
               ],
             ],
           ),

@@ -1,5 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/domain/entities/cart_item.dart';
 import 'package:my_shop/domain/repositories/product_repository.dart';
 import 'package:my_shop/presentation/screens/cart/bloc/cart_state.dart';
@@ -10,10 +11,10 @@ class CartCubit extends Cubit<CartState> {
 
   final ProductRepository _repository;
 
-  String _city = '';
-  String _street = '';
-  String _house = '';
-  String _apartment = '';
+  String _city = AppSettings.emptyString;
+  String _street = AppSettings.emptyString;
+  String _house = AppSettings.emptyString;
+  String _apartment = AppSettings.emptyString;
 
   Future<void> load() async {
     emit(state.copyWith(isLoading: true));

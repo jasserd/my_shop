@@ -80,7 +80,7 @@ class _NavigationItem extends StatelessWidget {
         child: Column(
           mainAxisSize: .min,
           children: [
-            Icon(icon, color: color, size: 24),
+            Icon(icon, color: color, size: AppSizes.bottomNavigationIconSize),
             AppText(label, style: AppTextStyles.caption.copyWith(color: color)),
           ],
         ),

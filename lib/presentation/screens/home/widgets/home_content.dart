@@ -47,7 +47,7 @@ class _LoadedHomeContent extends StatelessWidget {
         ),
         _section(top: AppSizes.spacingXl, child: const BannerCarousel()),
         _section(
-          top: 28,
+          top: AppSizes.homePopularSectionTopSpacing,
           bottom: AppSizes.spacingMd,
           child: AppText(localizations.popularTitle, style: AppTextStyles.h2),
         ),

@@ -27,7 +27,7 @@ class ProductCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final formattedPrice = NumberFormat.decimalPattern(
-      'ru',
+      AppSettings.numberFormatLocale,
     ).format(product.price);
 
     return Material(
@@ -89,7 +89,7 @@ class ProductCard extends StatelessWidget {
             AppText(
               title,
               style: AppTextStyles.bodyRegular,
-              maxLines: 2,
+              maxLines: AppSizes.productTitleMaxLines,
               overflow: .ellipsis,
             ),
             const SizedBox(height: AppSizes.spacingXs),
@@ -127,10 +127,13 @@ class _ProductAction extends StatelessWidget {
       shape: const CircleBorder(),
       child: IconButton(
         onPressed: onTap,
-        icon: Icon(icon, color: color, size: 20),
+        icon: Icon(icon, color: color, size: AppSizes.productActionIconSize),
         tooltip: tooltip,
         visualDensity: .compact,
-        constraints: const BoxConstraints.tightFor(width: 38, height: 38),
+        constraints: const BoxConstraints.tightFor(
+          width: AppSizes.productActionSize,
+          height: AppSizes.productActionSize,
+        ),
         padding: .zero,
       ),
     );

@@ -18,9 +18,9 @@ abstract class ProductMockApi {
   @GET(ApiConstants.categoriesPath)
   Future<List<Category>> getCategories();
 
-  @GET('/categories/{categoryId}/products')
+  @GET(ApiConstants.categoryProductsEndpoint)
   Future<List<Product>> getCategoryProducts(
-    @Path('categoryId') String categoryId,
+    @Path(ApiConstants.categoryIdPathParameter) String categoryId,
   );
 
   static void registerMocks() {
@@ -29,99 +29,79 @@ abstract class ProductMockApi {
       MockRoute(
         method: .get,
         path: ApiConstants.homePath,
-        description: 'MyShop home feed',
+        description: MockDataConstants.homeFeedDescription,
         response: MockResponse.ok({
-          'stories': [
-            {
-              'id': 'story-1',
-              'titleKey': 'storyNew',
-              'imageUrl': RemoteImages.storyNew,
-              'isViewed': false,
-            },
-            {
-              'id': 'story-2',
-              'titleKey': 'storyDecor',
-              'imageUrl': RemoteImages.storyDecor,
-              'isViewed': false,
-            },
-            {
-              'id': 'story-3',
-              'titleKey': 'storyAccessories',
-              'imageUrl': RemoteImages.storyAccessories,
-              'isViewed': true,
-            },
-            {
-              'id': 'story-4',
-              'titleKey': 'storyCare',
-              'imageUrl': RemoteImages.storyCare,
-              'isViewed': true,
-            },
+          ApiFields.stories: [
+            _story(1, LocalizationKeys.storyNew, RemoteImages.storyNew),
+            _story(2, LocalizationKeys.storyDecor, RemoteImages.storyDecor),
+            _story(
+              3,
+              LocalizationKeys.storyAccessories,
+              RemoteImages.storyAccessories,
+              isViewed: true,
+            ),
+            _story(
+              4,
+              LocalizationKeys.storyCare,
+              RemoteImages.storyCare,
+              isViewed: true,
+            ),
           ],
-          'products': [
-            {
-              'id': 'product-1',
-              'titleKey': 'productLamp',
-              'imageUrl': RemoteImages.productLamp,
-              'price': 12500,
-              'isFavorite': true,
-              'isInCart': true,
-            },
-            {
-              'id': 'product-2',
-              'titleKey': 'productCandle',
-              'imageUrl': RemoteImages.productCandle,
-              'price': 3200,
-              'isFavorite': true,
-              'isInCart': false,
-            },
-            {
-              'id': 'product-3',
-              'titleKey': 'productLinen',
-              'imageUrl': RemoteImages.productLinen,
-              'price': 8900,
-              'isFavorite': true,
-              'isInCart': false,
-            },
-            {
-              'id': 'product-4',
-              'titleKey': 'productBowl',
-              'imageUrl': RemoteImages.productBowl,
-              'price': 5400,
-              'isFavorite': true,
-              'isInCart': true,
-            },
-            {
-              'id': 'product-5',
-              'titleKey': 'productVase',
-              'imageUrl': RemoteImages.productVase,
-              'price': 6700,
-              'isFavorite': false,
-              'isInCart': false,
-            },
-            {
-              'id': 'product-6',
-              'titleKey': 'productChair',
-              'imageUrl': RemoteImages.productChair,
-              'price': 18900,
-              'isFavorite': false,
-              'isInCart': false,
-            },
-            {
-              'id': 'product-7',
-              'titleKey': 'productPerfume',
-              'imageUrl': RemoteImages.productPerfume,
-              'price': 7800,
-              'isFavorite': false,
-              'isInCart': false,
-            },
-            {
-              'id': 'product-8',
-              'titleKey': 'productDecor',
-              'imageUrl': RemoteImages.productDecor,
-              'price': 11200,
-              'isFavorite': false,
-              'isInCart': false,
-            },
+          ApiFields.products: [
+            _homeProduct(
+              1,
+              LocalizationKeys.productLamp,
+              RemoteImages.productLamp,
+              12500,
+              isFavorite: true,
+              isInCart: true,
+            ),
+            _homeProduct(
+              2,
+              LocalizationKeys.productCandle,
+              RemoteImages.productCandle,
+              3200,
+              isFavorite: true,
+            ),
+            _homeProduct(
+              3,
+              LocalizationKeys.productLinen,
+              RemoteImages.productLinen,
+              8900,
+              isFavorite: true,
+            ),
+            _homeProduct(
+              4,
+              LocalizationKeys.productBowl,
+              RemoteImages.productBowl,
+              5400,
+              isFavorite: true,
+              isInCart: true,
+            ),
+            _homeProduct(
+              5,
+              LocalizationKeys.productVase,
+              RemoteImages.productVase,
+              6700,
+            ),
+            _homeProduct(
+              6,
+              LocalizationKeys.productChair,
+              RemoteImages.productChair,
+              18900,
+            ),
+            _homeProduct(
+              7,
+              LocalizationKeys.productPerfume,
+              RemoteImages.productPerfume,
+              7800,
+            ),
+            _homeProduct(
+              8,
+              LocalizationKeys.productDecor,
+              RemoteImages.productDecor,
+              11200,
+            ),
           ],
         }, delay: ApiConstants.mockDelay),
       ),
@@ -134,7 +114,8 @@ abstract class ProductMockApi {
         method: .get,
         path: ApiConstants.categoryProductsPath,
         responseBuilder: (request) {
-          final categoryId = request.pathParameters['id'];
+          final categoryId =
+              request.pathParameters[ApiConstants.mockCategoryIdPathParameter];
           return MockResponse.ok(
             _categoryProducts[categoryId] ?? const [],
             delay: ApiConstants.mockDelay,
@@ -144,70 +125,241 @@ abstract class ProductMockApi {
     ]);
   }
 
-  static const List<Map<String, Object?>> _categories = [
-    {'id': 'clothing', 'titleKey': 'categoryClothing', 'icon': 'clothing'},
-    {'id': 'shoes', 'titleKey': 'categoryShoes', 'icon': 'shoes'},
-    {
-      'id': 'accessories',
-      'titleKey': 'categoryAccessories',
-      'icon': 'accessories',
-    },
-    {
-      'id': 'electronics',
-      'titleKey': 'categoryElectronics',
-      'icon': 'electronics',
-    },
-    {'id': 'books', 'titleKey': 'categoryBooks', 'icon': 'books'},
-    {'id': 'home', 'titleKey': 'categoryHome', 'icon': 'home'},
+  static final List<Map<String, Object?>> _categories = [
+    _category(
+      MockDataConstants.clothingCategoryId,
+      LocalizationKeys.categoryClothing,
+    ),
+    _category(
+      MockDataConstants.shoesCategoryId,
+      LocalizationKeys.categoryShoes,
+    ),
+    _category(
+      MockDataConstants.accessoriesCategoryId,
+      LocalizationKeys.categoryAccessories,
+    ),
+    _category(
+      MockDataConstants.electronicsCategoryId,
+      LocalizationKeys.categoryElectronics,
+    ),
+    _category(
+      MockDataConstants.booksCategoryId,
+      LocalizationKeys.categoryBooks,
+    ),
+    _category(MockDataConstants.homeCategoryId, LocalizationKeys.categoryHome),
   ];
 
   static final Map<String, List<Map<String, Object?>>> _categoryProducts = {
-    'clothing': [
-      _product('clothing-1', 'catalogLinenShirt', 4900),
-      _product('clothing-2', 'catalogWoolCoat', 18900),
-      _product('clothing-3', 'catalogSilkDress', 12700),
-      _product('clothing-4', 'catalogCottonTrousers', 6500),
+    MockDataConstants.clothingCategoryId: [
+      _product(
+        MockDataConstants.clothingCategoryId,
+        1,
+        LocalizationKeys.catalogLinenShirt,
+        4900,
+      ),
+      _product(
+        MockDataConstants.clothingCategoryId,
+        2,
+        LocalizationKeys.catalogWoolCoat,
+        18900,
+      ),
+      _product(
+        MockDataConstants.clothingCategoryId,
+        3,
+        LocalizationKeys.catalogSilkDress,
+        12700,
+      ),
+      _product(
+        MockDataConstants.clothingCategoryId,
+        4,
+        LocalizationKeys.catalogCottonTrousers,
+        6500,
+      ),
     ],
-    'shoes': [
-      _product('shoes-1', 'catalogLeatherSneakers', 9200),
-      _product('shoes-2', 'catalogClassicLoafers', 11800),
-      _product('shoes-3', 'catalogSuedeBoots', 15400),
-      _product('shoes-4', 'catalogMinimalSandals', 7300),
+    MockDataConstants.shoesCategoryId: [
+      _product(
+        MockDataConstants.shoesCategoryId,
+        1,
+        LocalizationKeys.catalogLeatherSneakers,
+        9200,
+      ),
+      _product(
+        MockDataConstants.shoesCategoryId,
+        2,
+        LocalizationKeys.catalogClassicLoafers,
+        11800,
+      ),
+      _product(
+        MockDataConstants.shoesCategoryId,
+        3,
+        LocalizationKeys.catalogSuedeBoots,
+        15400,
+      ),
+      _product(
+        MockDataConstants.shoesCategoryId,
+        4,
+        LocalizationKeys.catalogMinimalSandals,
+        7300,
+      ),
     ],
-    'accessories': [
-      _product('accessories-1', 'catalogLeatherBag', 14200),
-      _product('accessories-2', 'catalogGoldEarrings', 8600),
-      _product('accessories-3', 'catalogSilkScarf', 4200),
-      _product('accessories-4', 'catalogClassicWatch', 21900),
+    MockDataConstants.accessoriesCategoryId: [
+      _product(
+        MockDataConstants.accessoriesCategoryId,
+        1,
+        LocalizationKeys.catalogLeatherBag,
+        14200,
+      ),
+      _product(
+        MockDataConstants.accessoriesCategoryId,
+        2,
+        LocalizationKeys.catalogGoldEarrings,
+        8600,
+      ),
+      _product(
+        MockDataConstants.accessoriesCategoryId,
+        3,
+        LocalizationKeys.catalogSilkScarf,
+        4200,
+      ),
+      _product(
+        MockDataConstants.accessoriesCategoryId,
+        4,
+        LocalizationKeys.catalogClassicWatch,
+        21900,
+      ),
     ],
-    'electronics': [
-      _product('electronics-1', 'catalogWirelessHeadphones', 13900),
-      _product('electronics-2', 'catalogSmartSpeaker', 9900),
-      _product('electronics-3', 'catalogCompactCamera', 28900),
-      _product('electronics-4', 'catalogPortableCharger', 3900),
+    MockDataConstants.electronicsCategoryId: [
+      _product(
+        MockDataConstants.electronicsCategoryId,
+        1,
+        LocalizationKeys.catalogWirelessHeadphones,
+        13900,
+      ),
+      _product(
+        MockDataConstants.electronicsCategoryId,
+        2,
+        LocalizationKeys.catalogSmartSpeaker,
+        9900,
+      ),
+      _product(
+        MockDataConstants.electronicsCategoryId,
+        3,
+        LocalizationKeys.catalogCompactCamera,
+        28900,
+      ),
+      _product(
+        MockDataConstants.electronicsCategoryId,
+        4,
+        LocalizationKeys.catalogPortableCharger,
+        3900,
+      ),
     ],
-    'books': [
-      _product('books-1', 'catalogDesignBook', 2800),
-      _product('books-2', 'catalogArchitectureAlbum', 4600),
-      _product('books-3', 'catalogArtHistory', 3500),
-      _product('books-4', 'catalogModernInteriors', 3100),
+    MockDataConstants.booksCategoryId: [
+      _product(
+        MockDataConstants.booksCategoryId,
+        1,
+        LocalizationKeys.catalogDesignBook,
+        2800,
+      ),
+      _product(
+        MockDataConstants.booksCategoryId,
+        2,
+        LocalizationKeys.catalogArchitectureAlbum,
+        4600,
+      ),
+      _product(
+        MockDataConstants.booksCategoryId,
+        3,
+        LocalizationKeys.catalogArtHistory,
+        3500,
+      ),
+      _product(
+        MockDataConstants.booksCategoryId,
+        4,
+        LocalizationKeys.catalogModernInteriors,
+        3100,
+      ),
     ],
-    'home': [
-      _product('home-1', 'catalogCeramicVase', 2400),
-      _product('home-2', 'catalogAmberCandles', 1850),
-      _product('home-3', 'catalogGeometryPoster', 3200),
-      _product('home-4', 'catalogJuteBasket', 1100),
+    MockDataConstants.homeCategoryId: [
+      _product(
+        MockDataConstants.homeCategoryId,
+        1,
+        LocalizationKeys.catalogCeramicVase,
+        2400,
+      ),
+      _product(
+        MockDataConstants.homeCategoryId,
+        2,
+        LocalizationKeys.catalogAmberCandles,
+        1850,
+      ),
+      _product(
+        MockDataConstants.homeCategoryId,
+        3,
+        LocalizationKeys.catalogGeometryPoster,
+        3200,
+      ),
+      _product(
+        MockDataConstants.homeCategoryId,
+        4,
+        LocalizationKeys.catalogJuteBasket,
+        1100,
+      ),
     ],
   };
 
-  static Map<String, Object?> _product(String id, String titleKey, int price) {
+  static Map<String, Object?> _story(
+    int index,
+    String titleKey,
+    String imageUrl, {
+    bool isViewed = false,
+  }) {
     return {
-      'id': id,
-      'titleKey': titleKey,
-      'imageUrl': RemoteImages.common,
-      'price': price,
-      'isFavorite': false,
-      'isInCart': false,
+      ApiFields.id: _id(MockDataConstants.storyIdPrefix, index),
+      ApiFields.titleKey: titleKey,
+      ApiFields.imageUrl: imageUrl,
+      ApiFields.isViewed: isViewed,
     };
   }
+
+  static Map<String, Object?> _homeProduct(
+    int index,
+    String titleKey,
+    String imageUrl,
+    int price, {
+    bool isFavorite = false,
+    bool isInCart = false,
+  }) {
+    return {
+      ApiFields.id: _id(MockDataConstants.productIdPrefix, index),
+      ApiFields.titleKey: titleKey,
+      ApiFields.imageUrl: imageUrl,
+      ApiFields.price: price,
+      ApiFields.isFavorite: isFavorite,
+      ApiFields.isInCart: isInCart,
+    };
+  }
+
+  static Map<String, Object?> _category(String id, String titleKey) {
+    return {ApiFields.id: id, ApiFields.titleKey: titleKey, ApiFields.icon: id};
+  }
+
+  static Map<String, Object?> _product(
+    String categoryId,
+    int index,
+    String titleKey,
+    int price,
+  ) {
+    return {
+      ApiFields.id: _id(categoryId, index),
+      ApiFields.titleKey: titleKey,
+      ApiFields.imageUrl: RemoteImages.common,
+      ApiFields.price: price,
+      ApiFields.isFavorite: false,
+      ApiFields.isInCart: false,
+    };
+  }
+
+  static String _id(String prefix, int index) =>
+      '$prefix${MockDataConstants.idSeparator}$index';
 }
