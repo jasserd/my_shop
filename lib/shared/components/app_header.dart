@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
-
-import 'app_text.dart';
+import 'package:my_shop/shared/widgets/widgets.dart';
 
 class AppHeader extends StatelessWidget {
   const AppHeader({
@@ -30,19 +29,19 @@ class AppHeader extends StatelessWidget {
               children: [
                 AppText(
                   title,
-                  style: AppTextStyles.h1.copyWith(color: AppColors.primary),
+                  style: AppTextStyles.h1(color: AppColors.primary),
                 ),
                 const Spacer(),
-                if (actionIcon case final icon?)
-                  IconButton(
-                    onPressed: onActionPressed,
-                    tooltip: actionTooltip,
-                    icon: Icon(
-                      icon,
-                      color: AppColors.textPrimary,
-                      size: AppSizes.headerActionIconSize,
+                ...switch (actionIcon) {
+                  final icon? => [
+                    IconButton(
+                      onPressed: onActionPressed,
+                      tooltip: actionTooltip,
+                      icon: AppIcon.small(icon, color: AppColors.textPrimary),
                     ),
-                  ),
+                  ],
+                  null => const [],
+                },
               ],
             ),
           ),

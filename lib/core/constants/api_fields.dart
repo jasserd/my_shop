@@ -1,12 +1,14 @@
 abstract final class ApiFields {
-  static const String stories = 'stories';
-  static const String products = 'products';
-  static const String id = 'id';
-  static const String titleKey = 'titleKey';
-  static const String imageUrl = 'imageUrl';
-  static const String price = 'price';
-  static const String isViewed = 'isViewed';
-  static const String isFavorite = 'isFavorite';
-  static const String isInCart = 'isInCart';
-  static const String icon = 'icon';
+  static const stories = 'stories';
+  static const banners = 'banners';
+  static const products = 'products';
+  static const id = 'id';
+  static const titleKey = 'titleKey';
+  static const subtitleKey = 'subtitleKey';
+  static const imageUrl = 'imageUrl';
+  static const price = 'price';
+  static const isViewed = 'isViewed';
+  static const isFavorite = 'isFavorite';
+  static const isInCart = 'isInCart';
+  static const icon = 'icon';
 }

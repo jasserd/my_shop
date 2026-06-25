@@ -86,22 +86,17 @@ class _SortTag extends StatelessWidget {
             borderRadius: const .all(.circular(AppSizes.radiusFull)),
           ),
           child: Row(
+            spacing: AppSizes.spacingXs,
             mainAxisSize: .min,
             children: [
               AppText(
                 label,
-                style: AppTextStyles.bodyRegular.copyWith(
-                  color: foregroundColor,
-                ),
+                style: AppTextStyles.bodyRegular(color: foregroundColor),
               ),
-              if (icon case final icon?) ...[
-                const SizedBox(width: AppSizes.spacingXs),
-                Icon(
-                  icon,
-                  color: foregroundColor,
-                  size: AppSizes.sortTagIconSize,
-                ),
-              ],
+              ...switch (icon) {
+                final icon? => [AppIcon.small(icon, color: foregroundColor)],
+                null => const [],
+              },
             ],
           ),
         ),

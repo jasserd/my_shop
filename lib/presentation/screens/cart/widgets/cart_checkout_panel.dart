@@ -30,6 +30,7 @@ class CartCheckoutPanel extends StatelessWidget {
         border: Border(top: BorderSide(color: AppColors.border)),
       ),
       child: Column(
+        spacing: AppSizes.spacingMd,
         mainAxisSize: .min,
         children: [
           Row(
@@ -37,16 +38,15 @@ class CartCheckoutPanel extends StatelessWidget {
               Expanded(
                 child: AppText(
                   localizations.totalPaymentLabel,
-                  style: AppTextStyles.bodyLarge,
+                  style: AppTextStyles.bodyLarge(),
                 ),
               ),
               AppText(
                 localizations.productPrice(price),
-                style: AppTextStyles.h2.copyWith(color: AppColors.primary),
+                style: AppTextStyles.h2(color: AppColors.primary),
               ),
             ],
           ),
-          const SizedBox(height: AppSizes.spacingMd),
           AppButton(
             text: localizations.checkoutButton,
             onPressed: isCheckoutEnabled ? onCheckout : null,

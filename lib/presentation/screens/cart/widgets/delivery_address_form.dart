@@ -14,23 +14,22 @@ class DeliveryAddressForm extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
 
     return Column(
+      spacing: AppSizes.spacingMd,
       crossAxisAlignment: .start,
       children: [
-        AppText(localizations.deliveryAddressTitle, style: AppTextStyles.h2),
-        const SizedBox(height: AppSizes.spacingMd),
+        AppText(localizations.deliveryAddressTitle, style: AppTextStyles.h2()),
         AppTextField(
           label: localizations.cityLabel,
           hint: localizations.cityHint,
           onChanged: cartCubit.cityChanged,
         ),
-        const SizedBox(height: AppSizes.spacingMd),
         AppTextField(
           label: localizations.streetLabel,
           hint: localizations.streetHint,
           onChanged: cartCubit.streetChanged,
         ),
-        const SizedBox(height: AppSizes.spacingMd),
         Row(
+          spacing: AppSizes.spacingMd,
           crossAxisAlignment: .start,
           children: [
             Expanded(
@@ -41,7 +40,6 @@ class DeliveryAddressForm extends StatelessWidget {
                 onChanged: cartCubit.houseChanged,
               ),
             ),
-            const SizedBox(width: AppSizes.spacingMd),
             Expanded(
               child: AppTextField(
                 label: localizations.apartmentLabel,
@@ -52,7 +50,6 @@ class DeliveryAddressForm extends StatelessWidget {
             ),
           ],
         ),
-        const SizedBox(height: AppSizes.spacingMd),
         AppTextField(
           label: localizations.postalCodeLabel,
           hint: localizations.postalCodeHint,

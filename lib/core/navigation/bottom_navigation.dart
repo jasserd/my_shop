@@ -1,5 +1,5 @@
-import 'app_routes.dart';
-import 'bottom_navigation_constants.dart';
+import 'package:my_shop/core/navigation/app_routes.dart';
+import 'package:my_shop/core/navigation/bottom_navigation_constants.dart';
 
 abstract final class BottomNavigation {
   static int selectedIndex(String location) {

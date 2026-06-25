@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/presentation/screens/home/widgets/home_content.dart';
-import 'package:my_shop/shared/widgets/widgets.dart';
+import 'package:my_shop/shared/components/components.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

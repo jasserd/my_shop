@@ -1,20 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
-import 'package:my_shop/core/constants/constants.dart';
+import 'package:my_shop/core/di/di.dart';
 import 'package:my_shop/domain/entities/cart_item.dart';
 import 'package:my_shop/domain/repositories/product_repository.dart';
 import 'package:my_shop/presentation/screens/cart/bloc/cart_state.dart';
 
-@injectable
 class CartCubit extends Cubit<CartState> {
-  CartCubit(this._repository) : super(const CartState());
+  CartCubit() : super(const CartState());
 
-  final ProductRepository _repository;
-
-  String _city = AppSettings.emptyString;
-  String _street = AppSettings.emptyString;
-  String _house = AppSettings.emptyString;
-  String _apartment = AppSettings.emptyString;
+  final _repository = getIt.get<ProductRepository>();
 
   Future<void> load() async {
     emit(state.copyWith(isLoading: true));
@@ -32,7 +25,7 @@ class CartCubit extends Cubit<CartState> {
     if (updatedItem == null) {
       _emitCart(
         state.cartItems
-            .where((item) => item.product.id != cartItem.product.id)
+            .where((item) => item.product?.id != cartItem.product?.id)
             .toList(growable: false),
       );
       return;
@@ -41,26 +34,24 @@ class CartCubit extends Cubit<CartState> {
   }
 
   void cityChanged(String value) {
-    _city = value;
-    _emitCheckoutAvailability();
+    _emitAddress(state.copyWith(city: value));
   }
 
   void streetChanged(String value) {
-    _street = value;
-    _emitCheckoutAvailability();
+    _emitAddress(state.copyWith(street: value));
   }
 
   void houseChanged(String value) {
-    _house = value;
-    _emitCheckoutAvailability();
+    _emitAddress(state.copyWith(house: value));
   }
 
   void apartmentChanged(String value) {
-    _apartment = value;
-    _emitCheckoutAvailability();
+    _emitAddress(state.copyWith(apartment: value));
   }
 
-  void indexChanged(String _) {}
+  void indexChanged(String value) {
+    emit(state.copyWith(postalCode: value));
+  }
 
   void checkout() {
     _repository.clearCart();
@@ -71,8 +62,9 @@ class CartCubit extends Cubit<CartState> {
     _emitCart(
       state.cartItems
           .map(
-            (item) =>
-                item.product.id == updatedItem.product.id ? updatedItem : item,
+            (item) => item.product?.id == updatedItem.product?.id
+                ? updatedItem
+                : item,
           )
           .toList(growable: false),
     );
@@ -88,23 +80,25 @@ class CartCubit extends Cubit<CartState> {
           (total, item) => total + item.totalPrice,
         ),
         isCheckoutEnabled:
-            cartItems.isNotEmpty && _areRequiredAddressFieldsFilled,
+            cartItems.isNotEmpty && _areRequiredAddressFieldsFilled(state),
       ),
     );
   }
 
-  void _emitCheckoutAvailability() {
+  void _emitAddress(CartState updatedState) {
     emit(
-      state.copyWith(
+      updatedState.copyWith(
         isCheckoutEnabled:
-            state.cartItems.isNotEmpty && _areRequiredAddressFieldsFilled,
+            updatedState.cartItems.isNotEmpty &&
+            _areRequiredAddressFieldsFilled(updatedState),
       ),
     );
   }
 
-  bool get _areRequiredAddressFieldsFilled =>
-      _city.trim().isNotEmpty &&
-      _street.trim().isNotEmpty &&
-      _house.trim().isNotEmpty &&
-      _apartment.trim().isNotEmpty;
+  bool _areRequiredAddressFieldsFilled(CartState state) {
+    return state.city.trim().isNotEmpty &&
+        state.street.trim().isNotEmpty &&
+        state.house.trim().isNotEmpty &&
+        state.apartment.trim().isNotEmpty;
+  }
 }

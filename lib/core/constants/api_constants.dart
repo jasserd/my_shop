@@ -1,13 +1,12 @@
 abstract final class ApiConstants {
-  static const String baseUrl = 'https://api.myshop.local';
-  static const String homePath = '/home';
-  static const String categoriesPath = '/categories';
-  static const String categoryProductsEndpoint =
-      '/categories/{categoryId}/products';
-  static const String categoryProductsPath = '/categories/:id/products';
-  static const String categoryIdPathParameter = 'categoryId';
-  static const String mockCategoryIdPathParameter = 'id';
-  static const Duration connectTimeout = Duration(seconds: 15);
-  static const Duration receiveTimeout = Duration(seconds: 15);
-  static const Duration mockDelay = Duration(milliseconds: 900);
+  static const baseUrl = 'https://api.myshop.local';
+  static const homePath = '/home';
+  static const categoriesPath = '/categories';
+  static const categoryProductsEndpoint = '/categories/{categoryId}/products';
+  static const categoryProductsPath = '/categories/:id/products';
+  static const categoryIdPathParameter = 'categoryId';
+  static const mockCategoryIdPathParameter = 'id';
+  static const connectTimeout = Duration(seconds: 15);
+  static const receiveTimeout = Duration(seconds: 15);
+  static const mockDelay = Duration(milliseconds: 900);
 }

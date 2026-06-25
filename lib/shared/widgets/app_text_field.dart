@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
-
-import 'app_text.dart';
+import 'package:my_shop/shared/widgets/app_text.dart';
 
 class AppTextField extends StatelessWidget {
   const AppTextField({
@@ -22,10 +21,10 @@ class AppTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Column(
+      spacing: AppSizes.spacingSm,
       crossAxisAlignment: .start,
       children: [
         AppText(label),
-        const SizedBox(height: AppSizes.spacingSm),
         SizedBox(
           height: AppSizes.inputHeight,
           child: TextField(
@@ -33,10 +32,10 @@ class AppTextField extends StatelessWidget {
             obscureText: obscureText,
             keyboardType: keyboardType,
             cursorColor: AppColors.primary,
-            style: AppTextStyles.bodyRegular,
+            style: AppTextStyles.bodyRegular(),
             decoration: InputDecoration(
               hintText: hint,
-              hintStyle: AppTextStyles.bodyRegular.copyWith(
+              hintStyle: AppTextStyles.bodyRegular(
                 color: AppColors.textSecondary,
               ),
               filled: true,

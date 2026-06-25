@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
+import 'package:my_shop/shared/widgets/app_icon.dart';
 
 class AppNetworkImage extends StatelessWidget {
   const AppNetworkImage({
@@ -41,7 +42,7 @@ class AppNetworkImage extends StatelessWidget {
         return const ColoredBox(
           color: AppColors.surface,
           child: Center(
-            child: Icon(
+            child: AppIcon.small(
               Icons.image_not_supported_outlined,
               color: AppColors.textSecondary,
             ),

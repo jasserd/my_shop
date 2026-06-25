@@ -1,14 +1,13 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:my_shop/core/di/di.dart';
 import 'package:my_shop/domain/entities/product.dart';
 import 'package:my_shop/domain/repositories/product_repository.dart';
 import 'package:my_shop/presentation/screens/home/bloc/home_state.dart';
 
-@injectable
 class HomeCubit extends Cubit<HomeState> {
-  HomeCubit(this._repository) : super(const HomeState());
+  HomeCubit() : super(const HomeState());
 
-  final ProductRepository _repository;
+  final _repository = getIt.get<ProductRepository>();
 
   Future<void> load() async {
     emit(state.copyWith(isLoading: true));
@@ -16,6 +15,7 @@ class HomeCubit extends Cubit<HomeState> {
     emit(
       state.copyWith(
         stories: data.stories,
+        banners: data.banners,
         products: data.products,
         isLoading: false,
       ),

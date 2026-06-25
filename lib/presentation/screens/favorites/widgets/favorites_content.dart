@@ -6,6 +6,7 @@ import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/navigation/navigation.dart';
 import 'package:my_shop/presentation/screens/favorites/bloc/favorites_cubit.dart';
 import 'package:my_shop/presentation/screens/favorites/bloc/favorites_state.dart';
+import 'package:my_shop/shared/components/components.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class FavoritesContent extends StatelessWidget {
@@ -55,30 +56,29 @@ class _EmptyFavorites extends StatelessWidget {
       child: SingleChildScrollView(
         padding: const .all(AppSizes.screenPadding),
         child: Column(
+          spacing: AppSizes.spacingXl,
           mainAxisSize: .min,
           children: [
-            const Icon(
-              Icons.favorite_border,
-              size: AppSizes.emptyStateIconSize,
-              color: AppColors.border,
+            const AppIcon.large(Icons.favorite_border, color: AppColors.border),
+            Column(
+              spacing: AppSizes.spacingSm,
+              children: [
+                AppText(
+                  localizations.emptyFavoritesTitle,
+                  style: AppTextStyles.bodyLarge(
+                    color: AppColors.textSecondary,
+                  ),
+                  textAlign: .center,
+                ),
+                AppText(
+                  localizations.emptyFavoritesDescription,
+                  style: AppTextStyles.bodyRegular(
+                    color: AppColors.textSecondary,
+                  ),
+                  textAlign: .center,
+                ),
+              ],
             ),
-            const SizedBox(height: AppSizes.spacingXl),
-            AppText(
-              localizations.emptyFavoritesTitle,
-              style: AppTextStyles.bodyLarge.copyWith(
-                color: AppColors.textSecondary,
-              ),
-              textAlign: .center,
-            ),
-            const SizedBox(height: AppSizes.spacingSm),
-            AppText(
-              localizations.emptyFavoritesDescription,
-              style: AppTextStyles.bodyRegular.copyWith(
-                color: AppColors.textSecondary,
-              ),
-              textAlign: .center,
-            ),
-            const SizedBox(height: AppSizes.spacingXl),
             AppButton(
               text: localizations.goShoppingButton,
               onPressed: () => context.go(AppRoutes.home),

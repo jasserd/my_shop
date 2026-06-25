@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'app_colors.dart';
-import 'app_text_styles.dart';
+import 'package:my_shop/core/constants/app_colors.dart';
+import 'package:my_shop/core/constants/app_text_styles.dart';
 
 abstract final class AppTheme {
   static ThemeData get light => ThemeData(
@@ -15,11 +14,11 @@ abstract final class AppTheme {
       onSurface: AppColors.textPrimary,
     ),
     textTheme: TextTheme(
-      headlineLarge: AppTextStyles.h1,
-      headlineMedium: AppTextStyles.h2,
-      bodyLarge: AppTextStyles.bodyLarge,
-      bodyMedium: AppTextStyles.bodyRegular,
-      labelSmall: AppTextStyles.caption,
+      headlineLarge: AppTextStyles.h1(),
+      headlineMedium: AppTextStyles.h2(),
+      bodyLarge: AppTextStyles.bodyLarge(),
+      bodyMedium: AppTextStyles.bodyRegular(),
+      labelSmall: AppTextStyles.caption(),
     ),
   );
 }

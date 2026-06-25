@@ -1,8 +1,8 @@
 abstract final class AppRoutes {
-  static const String auth = '/';
-  static const String home = '/home';
-  static const String catalog = '/catalog';
-  static const String favorites = '/favorites';
-  static const String cart = '/cart';
-  static const String payment = '/payment';
+  static const auth = '/';
+  static const home = '/home';
+  static const catalog = '/catalog';
+  static const favorites = '/favorites';
+  static const cart = '/cart';
+  static const payment = '/payment';
 }

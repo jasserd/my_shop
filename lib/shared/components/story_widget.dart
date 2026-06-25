@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/domain/entities/story.dart';
-
-import 'app_network_image.dart';
-import 'app_text.dart';
+import 'package:my_shop/shared/widgets/widgets.dart';
 
 class StoryWidget extends StatelessWidget {
   const StoryWidget({
@@ -25,6 +23,7 @@ class StoryWidget extends StatelessWidget {
         onTap: onTap,
         borderRadius: const .all(.circular(AppSizes.radiusMedium)),
         child: Column(
+          spacing: AppSizes.spacingXs,
           children: [
             Container(
               width: AppSizes.storyImageSize + AppSizes.storyRingSizeOffset,
@@ -33,22 +32,24 @@ class StoryWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 shape: .circle,
                 border: Border.all(
-                  color: story.isViewed ? AppColors.border : AppColors.primary,
-                  width: story.isViewed
+                  color: story.isViewed == true
+                      ? AppColors.border
+                      : AppColors.primary,
+                  width: story.isViewed == true
                       ? AppSizes.borderThin
                       : AppSizes.borderRegular,
                 ),
               ),
               child: ClipOval(
-                child: AppNetworkImage(imageUrl: story.imageUrl, fit: .cover),
+                child: AppNetworkImage(
+                  imageUrl: story.imageUrl ?? AppSettings.emptyString,
+                  fit: .cover,
+                ),
               ),
             ),
-            const SizedBox(height: AppSizes.spacingXs),
             AppText(
               title,
-              style: AppTextStyles.caption.copyWith(
-                color: AppColors.textPrimary,
-              ),
+              style: AppTextStyles.caption(color: AppColors.textPrimary),
               maxLines: AppSizes.storyTitleMaxLines,
               overflow: .ellipsis,
               textAlign: .center,

@@ -6,8 +6,8 @@ import 'package:my_shop/core/utils/utils.dart';
 import 'package:my_shop/domain/entities/category.dart';
 import 'package:my_shop/presentation/screens/catalog/bloc/catalog_cubit.dart';
 import 'package:my_shop/presentation/screens/catalog/bloc/catalog_state.dart';
-import 'package:my_shop/presentation/screens/catalog/widgets/category_card.dart';
 import 'package:my_shop/presentation/screens/catalog/widgets/category_sort_tags.dart';
+import 'package:my_shop/shared/components/components.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class CatalogContent extends StatelessWidget {
@@ -34,17 +34,20 @@ class _CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      slivers: [
-        for (final category in state.categories)
-          ..._categorySlivers(context, category),
-        const SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingXl)),
-      ],
+    final slivers = <Widget>[];
+    for (final category in state.categories) {
+      slivers.addAll(_categorySlivers(context, category));
+    }
+    slivers.add(
+      const SliverToBoxAdapter(child: SizedBox(height: AppSizes.spacingXl)),
     );
+
+    return CustomScrollView(slivers: slivers);
   }
 
   List<Widget> _categorySlivers(BuildContext context, Category category) {
-    final categoryState = state.categoryStates[category.id];
+    final categoryId = category.id ?? AppSettings.emptyString;
+    final categoryState = state.categoryStates[categoryId];
     final isExpanded = categoryState != null;
     final localizations = AppLocalizations.of(context);
 
@@ -59,10 +62,12 @@ class _CategoryList extends StatelessWidget {
         sliver: SliverToBoxAdapter(
           child: CategoryCard(
             category: category,
-            title: localizations.byKey(category.titleKey),
+            title: localizations.byKey(
+              category.titleKey ?? AppSettings.emptyString,
+            ),
             isExpanded: isExpanded,
             onTap: () {
-              context.read<CatalogCubit>().toggleCategory(category.id);
+              context.read<CatalogCubit>().toggleCategory(categoryId);
             },
           ),
         ),
@@ -79,44 +84,54 @@ class _CategoryList extends StatelessWidget {
             child: CategorySortTags(
               activeSort: categoryState.sortType,
               onPriceTap: () {
-                context.read<CatalogCubit>().togglePriceSort(category.id);
+                context.read<CatalogCubit>().togglePriceSort(categoryId);
               },
               onAlphabetTap: () {
-                context.read<CatalogCubit>().toggleAlphabetSort(category.id);
+                context.read<CatalogCubit>().toggleAlphabetSort(categoryId);
               },
             ),
           ),
         ),
-        if (categoryState.isLoading)
-          const SliverToBoxAdapter(
-            child: SizedBox(
-              height: AppSizes.categoryLoaderHeight,
-              child: AppLoader(),
-            ),
-          )
-        else
-          SliverPadding(
-            padding: const .fromLTRB(
-              AppSizes.screenPadding,
-              AppSizes.spacingMd,
-              AppSizes.screenPadding,
-              AppSizes.spacingLg,
-            ),
-            sliver: ProductGrid(
-              products: categoryState.products,
-              onProductTap: (product) {},
-              onFavoriteTap: (product) {
-                context.read<CatalogCubit>().toggleFavorite(
-                  category.id,
-                  product,
-                );
-              },
-              onCartTap: (product) {
-                context.read<CatalogCubit>().toggleCart(category.id, product);
-              },
-            ),
-          ),
+        _buildCategoryProducts(
+          context,
+          categoryId: categoryId,
+          categoryState: categoryState,
+        ),
       ],
     ];
+  }
+
+  Widget _buildCategoryProducts(
+    BuildContext context, {
+    required String categoryId,
+    required CategoryState categoryState,
+  }) {
+    if (categoryState.isLoading) {
+      return const SliverToBoxAdapter(
+        child: SizedBox(
+          height: AppSizes.categoryLoaderHeight,
+          child: AppLoader(),
+        ),
+      );
+    }
+
+    return SliverPadding(
+      padding: const .fromLTRB(
+        AppSizes.screenPadding,
+        AppSizes.spacingMd,
+        AppSizes.screenPadding,
+        AppSizes.spacingLg,
+      ),
+      sliver: ProductGrid(
+        products: categoryState.products,
+        onProductTap: (product) {},
+        onFavoriteTap: (product) {
+          context.read<CatalogCubit>().toggleFavorite(categoryId, product);
+        },
+        onCartTap: (product) {
+          context.read<CatalogCubit>().toggleCart(categoryId, product);
+        },
+      ),
+    );
   }
 }

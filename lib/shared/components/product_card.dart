@@ -3,9 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/domain/entities/product.dart';
-
-import 'app_network_image.dart';
-import 'app_text.dart';
+import 'package:my_shop/shared/widgets/widgets.dart';
 
 class ProductCard extends StatelessWidget {
   const ProductCard({
@@ -28,7 +26,7 @@ class ProductCard extends StatelessWidget {
     final localizations = AppLocalizations.of(context);
     final formattedPrice = NumberFormat.decimalPattern(
       AppSettings.numberFormatLocale,
-    ).format(product.price);
+    ).format(product.price ?? 0);
 
     return Material(
       color: AppColors.background,
@@ -36,6 +34,7 @@ class ProductCard extends StatelessWidget {
         onTap: onTap,
         borderRadius: const .all(.circular(AppSizes.radiusMedium)),
         child: Column(
+          spacing: AppSizes.spacingSm,
           crossAxisAlignment: .start,
           children: [
             SizedBox(
@@ -46,7 +45,7 @@ class ProductCard extends StatelessWidget {
                   ClipRRect(
                     borderRadius: const .all(.circular(AppSizes.radiusMedium)),
                     child: AppNetworkImage(
-                      imageUrl: product.imageUrl,
+                      imageUrl: product.imageUrl ?? AppSettings.emptyString,
                       fit: .cover,
                     ),
                   ),
@@ -54,27 +53,27 @@ class ProductCard extends StatelessWidget {
                     top: AppSizes.spacingSm,
                     right: AppSizes.spacingSm,
                     child: Row(
+                      spacing: AppSizes.spacingXs,
                       mainAxisSize: .min,
                       children: [
                         _ProductAction(
                           icon: Icons.shopping_cart,
-                          color: product.isInCart
+                          color: product.isInCart == true
                               ? AppColors.primary
                               : AppColors.textSecondary,
-                          tooltip: product.isInCart
+                          tooltip: product.isInCart == true
                               ? localizations.removeFromCartTooltip
                               : localizations.addToCartTooltip,
                           onTap: onCartTap,
                         ),
-                        const SizedBox(width: AppSizes.spacingXs),
                         _ProductAction(
-                          icon: product.isFavorite
+                          icon: product.isFavorite == true
                               ? Icons.favorite
                               : Icons.favorite_border,
-                          color: product.isFavorite
+                          color: product.isFavorite == true
                               ? AppColors.primary
                               : AppColors.textSecondary,
-                          tooltip: product.isFavorite
+                          tooltip: product.isFavorite == true
                               ? localizations.removeFromFavoritesTooltip
                               : localizations.addToFavoritesTooltip,
                           onTap: onFavoriteTap,
@@ -85,20 +84,23 @@ class ProductCard extends StatelessWidget {
                 ],
               ),
             ),
-            const SizedBox(height: AppSizes.spacingSm),
-            AppText(
-              title,
-              style: AppTextStyles.bodyRegular,
-              maxLines: AppSizes.productTitleMaxLines,
-              overflow: .ellipsis,
-            ),
-            const SizedBox(height: AppSizes.spacingXs),
-            AppText(
-              localizations.productPrice(formattedPrice),
-              style: AppTextStyles.bodyLarge.copyWith(
-                color: AppColors.primary,
-                fontWeight: .w600,
-              ),
+            Column(
+              spacing: AppSizes.spacingXs,
+              crossAxisAlignment: .start,
+              children: [
+                AppText(
+                  title,
+                  style: AppTextStyles.bodyRegular(),
+                  maxLines: AppSizes.productTitleMaxLines,
+                  overflow: .ellipsis,
+                ),
+                AppText(
+                  localizations.productPrice(formattedPrice),
+                  style: AppTextStyles.bodyLarge(
+                    color: AppColors.primary,
+                  ).copyWith(fontWeight: .w600),
+                ),
+              ],
             ),
           ],
         ),
@@ -127,7 +129,7 @@ class _ProductAction extends StatelessWidget {
       shape: const CircleBorder(),
       child: IconButton(
         onPressed: onTap,
-        icon: Icon(icon, color: color, size: AppSizes.productActionIconSize),
+        icon: AppIcon.small(icon, color: color),
         tooltip: tooltip,
         visualDensity: .compact,
         constraints: const BoxConstraints.tightFor(

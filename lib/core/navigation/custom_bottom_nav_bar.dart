@@ -78,10 +78,11 @@ class _NavigationItem extends StatelessWidget {
           borderRadius: const .all(.circular(AppSizes.radiusLarge)),
         ),
         child: Column(
+          spacing: AppSizes.spacingXs,
           mainAxisSize: .min,
           children: [
-            Icon(icon, color: color, size: AppSizes.bottomNavigationIconSize),
-            AppText(label, style: AppTextStyles.caption.copyWith(color: color)),
+            AppIcon.small(icon, color: color),
+            AppText(label, style: AppTextStyles.caption(color: color)),
           ],
         ),
       ),

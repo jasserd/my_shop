@@ -47,6 +47,26 @@ abstract class ProductMockApi {
               isViewed: true,
             ),
           ],
+          ApiFields.banners: [
+            _banner(
+              1,
+              LocalizationKeys.bannerCollectionTitle,
+              LocalizationKeys.bannerCollectionSubtitle,
+              RemoteImages.bannerCollection,
+            ),
+            _banner(
+              2,
+              LocalizationKeys.bannerComfortTitle,
+              LocalizationKeys.bannerComfortSubtitle,
+              RemoteImages.bannerComfort,
+            ),
+            _banner(
+              3,
+              LocalizationKeys.bannerDetailsTitle,
+              LocalizationKeys.bannerDetailsSubtitle,
+              RemoteImages.bannerDetails,
+            ),
+          ],
           ApiFields.products: [
             _homeProduct(
               1,
@@ -125,7 +145,7 @@ abstract class ProductMockApi {
     ]);
   }
 
-  static final List<Map<String, Object?>> _categories = [
+  static final _categories = <Map<String, Object?>>[
     _category(
       MockDataConstants.clothingCategoryId,
       LocalizationKeys.categoryClothing,
@@ -149,7 +169,7 @@ abstract class ProductMockApi {
     _category(MockDataConstants.homeCategoryId, LocalizationKeys.categoryHome),
   ];
 
-  static final Map<String, List<Map<String, Object?>>> _categoryProducts = {
+  static final _categoryProducts = <String, List<Map<String, Object?>>>{
     MockDataConstants.clothingCategoryId: [
       _product(
         MockDataConstants.clothingCategoryId,
@@ -319,6 +339,20 @@ abstract class ProductMockApi {
       ApiFields.titleKey: titleKey,
       ApiFields.imageUrl: imageUrl,
       ApiFields.isViewed: isViewed,
+    };
+  }
+
+  static Map<String, Object?> _banner(
+    int index,
+    String titleKey,
+    String subtitleKey,
+    String imageUrl,
+  ) {
+    return {
+      ApiFields.id: _id(MockDataConstants.bannerIdPrefix, index),
+      ApiFields.titleKey: titleKey,
+      ApiFields.subtitleKey: subtitleKey,
+      ApiFields.imageUrl: imageUrl,
     };
   }
 

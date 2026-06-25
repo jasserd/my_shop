@@ -1,14 +1,15 @@
+import 'package:collection/collection.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:injectable/injectable.dart';
+import 'package:my_shop/core/constants/constants.dart';
+import 'package:my_shop/core/di/di.dart';
 import 'package:my_shop/domain/entities/product.dart';
 import 'package:my_shop/domain/repositories/product_repository.dart';
 import 'package:my_shop/presentation/screens/catalog/bloc/catalog_state.dart';
 
-@injectable
 class CatalogCubit extends Cubit<CatalogState> {
-  CatalogCubit(this._repository) : super(const CatalogState());
+  CatalogCubit() : super(const CatalogState());
 
-  final ProductRepository _repository;
+  final _repository = getIt.get<ProductRepository>();
 
   Future<void> load() async {
     emit(state.copyWith(isLoading: true));
@@ -26,7 +27,7 @@ class CatalogCubit extends Cubit<CatalogState> {
     _emitCategoryStates({...categoryStates, categoryId: const CategoryState()});
 
     final products = await _repository.getCategoryProducts(categoryId);
-    if (!state.categoryStates.containsKey(categoryId)) {
+    if (state.categoryStates.containsKey(categoryId) == false) {
       return;
     }
 
@@ -62,16 +63,21 @@ class CatalogCubit extends Cubit<CatalogState> {
         CatalogSortType.none => categoryState.allProducts,
         CatalogSortType.priceAscending => [
           ...categoryState.allProducts,
-        ]..sort((left, right) => left.price.compareTo(right.price)),
-        CatalogSortType.priceDescending => [
-          ...categoryState.allProducts,
-        ]..sort((left, right) => right.price.compareTo(left.price)),
+        ]..sortBy((product) => product.price ?? 0),
+        CatalogSortType.priceDescending =>
+          ([...categoryState.allProducts]
+                ..sortBy((product) => product.price ?? 0))
+              .reversed
+              .toList(growable: false),
         CatalogSortType.alphabetAscending => [
           ...categoryState.allProducts,
-        ]..sort((left, right) => left.titleKey.compareTo(right.titleKey)),
-        CatalogSortType.alphabetDescending => [
-          ...categoryState.allProducts,
-        ]..sort((left, right) => right.titleKey.compareTo(left.titleKey)),
+        ]..sortBy((product) => product.titleKey ?? AppSettings.emptyString),
+        CatalogSortType.alphabetDescending =>
+          ([...categoryState.allProducts]..sortBy(
+                (product) => product.titleKey ?? AppSettings.emptyString,
+              ))
+              .reversed
+              .toList(growable: false),
       };
 
       return categoryState.copyWith(products: products, sortType: sortType);

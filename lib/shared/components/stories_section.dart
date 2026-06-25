@@ -3,7 +3,7 @@ import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/utils/utils.dart';
 import 'package:my_shop/domain/entities/story.dart';
-import 'package:my_shop/shared/widgets/widgets.dart';
+import 'package:my_shop/shared/components/story_widget.dart';
 
 class StoriesSection extends StatelessWidget {
   const StoriesSection({
@@ -31,7 +31,9 @@ class StoriesSection extends StatelessWidget {
           final story = stories[index];
           return StoryWidget(
             story: story,
-            title: localizations.byKey(story.titleKey),
+            title: localizations.byKey(
+              story.titleKey ?? AppSettings.emptyString,
+            ),
             onTap: () => onStoryTap(story),
           );
         },

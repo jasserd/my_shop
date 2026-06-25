@@ -5,9 +5,8 @@ import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/domain/entities/story.dart';
 import 'package:my_shop/presentation/screens/home/bloc/home_cubit.dart';
 import 'package:my_shop/presentation/screens/home/bloc/home_state.dart';
-import 'package:my_shop/presentation/screens/home/widgets/banner_carousel.dart';
-import 'package:my_shop/presentation/screens/home/widgets/stories_section.dart';
 import 'package:my_shop/presentation/screens/home/widgets/story_viewer.dart';
+import 'package:my_shop/shared/components/components.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class HomeContent extends StatelessWidget {
@@ -45,11 +44,14 @@ class _LoadedHomeContent extends StatelessWidget {
             onStoryTap: (story) => _openStory(context, story),
           ),
         ),
-        _section(top: AppSizes.spacingXl, child: const BannerCarousel()),
+        _section(
+          top: AppSizes.spacingXl,
+          child: BannerCarousel(banners: state.banners),
+        ),
         _section(
           top: AppSizes.homePopularSectionTopSpacing,
           bottom: AppSizes.spacingMd,
-          child: AppText(localizations.popularTitle, style: AppTextStyles.h2),
+          child: AppText(localizations.popularTitle, style: AppTextStyles.h2()),
         ),
         SliverPadding(
           padding: const .fromLTRB(
@@ -62,10 +64,14 @@ class _LoadedHomeContent extends StatelessWidget {
             products: state.products,
             onProductTap: (product) {},
             onFavoriteTap: (product) {
-              context.read<HomeCubit>().toggleFavorite(product.id);
+              context.read<HomeCubit>().toggleFavorite(
+                product.id ?? AppSettings.emptyString,
+              );
             },
             onCartTap: (product) {
-              context.read<HomeCubit>().toggleCart(product.id);
+              context.read<HomeCubit>().toggleCart(
+                product.id ?? AppSettings.emptyString,
+              );
             },
           ),
         ),
@@ -90,7 +96,9 @@ class _LoadedHomeContent extends StatelessWidget {
   }
 
   Future<void> _openStory(BuildContext context, Story story) {
-    context.read<HomeCubit>().markStoryViewed(story.id);
+    context.read<HomeCubit>().markStoryViewed(
+      story.id ?? AppSettings.emptyString,
+    );
     return showStoryViewer(context, story: story);
   }
 }

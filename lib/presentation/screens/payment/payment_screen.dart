@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/navigation/navigation.dart';
+import 'package:my_shop/shared/components/components.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class PaymentScreen extends StatelessWidget {
@@ -64,25 +65,19 @@ class _PaymentSuccessContent extends StatelessWidget {
               child: const CircleAvatar(
                 radius: AppSizes.paymentSuccessIconRadius,
                 backgroundColor: AppColors.success,
-                child: Icon(
-                  Icons.check,
-                  color: AppColors.background,
-                  size: AppSizes.paymentSuccessIconSize,
-                ),
+                child: AppIcon.small(Icons.check, color: AppColors.background),
               ),
             ),
             const SizedBox(height: AppSizes.spacingXxl),
             AppText(
               localizations.paymentSuccessTitle,
-              style: AppTextStyles.h1,
+              style: AppTextStyles.h1(),
               textAlign: .center,
             ),
             const SizedBox(height: AppSizes.spacingSm),
             AppText(
               localizations.paymentSuccessDescription,
-              style: AppTextStyles.bodyRegular.copyWith(
-                color: AppColors.textSecondary,
-              ),
+              style: AppTextStyles.bodyRegular(color: AppColors.textSecondary),
               textAlign: .center,
             ),
             const SizedBox(height: AppSizes.spacingXxxl),

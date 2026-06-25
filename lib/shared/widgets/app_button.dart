@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
-
-import 'app_text.dart';
+import 'package:my_shop/shared/widgets/app_text.dart';
 
 class AppButton extends StatelessWidget {
   const AppButton({
@@ -44,7 +43,7 @@ class AppButton extends StatelessWidget {
               borderRadius: .all(.circular(AppSizes.radiusMedium)),
             ),
           ),
-          textStyle: WidgetStatePropertyAll(AppTextStyles.button),
+          textStyle: WidgetStatePropertyAll(AppTextStyles.button()),
         ),
         child: isLoading
             ? const SizedBox.square(
@@ -56,7 +55,7 @@ class AppButton extends StatelessWidget {
               )
             : AppText(
                 text,
-                style: AppTextStyles.button.copyWith(
+                style: AppTextStyles.button(
                   color: onPressed == null
                       ? AppColors.textSecondary
                       : AppColors.background,

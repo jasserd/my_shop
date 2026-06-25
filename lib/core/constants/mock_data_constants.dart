@@ -1,18 +1,19 @@
 abstract final class MockDataConstants {
-  static const String homeFeedDescription = 'MyShop home feed';
-  static const String storyIdPrefix = 'story';
-  static const String productIdPrefix = 'product';
-  static const String idSeparator = '-';
+  static const homeFeedDescription = 'MyShop home feed';
+  static const storyIdPrefix = 'story';
+  static const bannerIdPrefix = 'banner';
+  static const productIdPrefix = 'product';
+  static const idSeparator = '-';
 
-  static const String clothingCategoryId = 'clothing';
-  static const String shoesCategoryId = 'shoes';
-  static const String accessoriesCategoryId = 'accessories';
-  static const String electronicsCategoryId = 'electronics';
-  static const String booksCategoryId = 'books';
-  static const String homeCategoryId = 'home';
+  static const clothingCategoryId = 'clothing';
+  static const shoesCategoryId = 'shoes';
+  static const accessoriesCategoryId = 'accessories';
+  static const electronicsCategoryId = 'electronics';
+  static const booksCategoryId = 'books';
+  static const homeCategoryId = 'home';
 
-  static const String initialCartFirstProductId = 'product-1';
-  static const String initialCartSecondProductId = 'product-4';
-  static const int initialCartFirstQuantity = 1;
-  static const int initialCartSecondQuantity = 2;
+  static const initialCartFirstProductId = 'product-1';
+  static const initialCartSecondProductId = 'product-4';
+  static const initialCartFirstQuantity = 1;
+  static const initialCartSecondQuantity = 2;
 }

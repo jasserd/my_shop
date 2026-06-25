@@ -5,10 +5,10 @@ part 'cart_item.mapper.dart';
 
 @MappableClass()
 class CartItem with CartItemMappable {
-  const CartItem({required this.product, required this.quantity});
+  const CartItem({this.product, this.quantity});
 
-  final Product product;
-  final int quantity;
+  final Product? product;
+  final int? quantity;
 
-  int get totalPrice => product.price * quantity;
+  int get totalPrice => (product?.price ?? 0) * (quantity ?? 0);
 }

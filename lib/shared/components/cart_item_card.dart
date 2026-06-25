@@ -4,9 +4,8 @@ import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/utils/utils.dart';
 import 'package:my_shop/domain/entities/cart_item.dart';
-
-import 'app_network_image.dart';
-import 'app_text.dart';
+import 'package:my_shop/domain/entities/product.dart';
+import 'package:my_shop/shared/widgets/widgets.dart';
 
 class CartItemCard extends StatelessWidget {
   const CartItemCard({
@@ -23,10 +22,10 @@ class CartItemCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final product = cartItem.product;
+    final product = cartItem.product ?? const Product();
     final price = NumberFormat.decimalPattern(
       AppSettings.numberFormatLocale,
-    ).format(product.price);
+    ).format(product.price ?? 0);
 
     return Container(
       height: AppSizes.cartItemHeight,
@@ -37,41 +36,40 @@ class CartItemCard extends StatelessWidget {
         borderRadius: const .all(.circular(AppSizes.radiusMedium)),
       ),
       child: Row(
+        spacing: AppSizes.spacingMd,
         children: [
           ClipRRect(
             borderRadius: const .all(.circular(AppSizes.radiusSmall)),
             child: AppNetworkImage(
-              imageUrl: product.imageUrl,
+              imageUrl: product.imageUrl ?? AppSettings.emptyString,
               width: AppSizes.cartItemImageSize,
               height: AppSizes.cartItemImageSize,
               fit: .cover,
             ),
           ),
-          const SizedBox(width: AppSizes.spacingMd),
           Expanded(
             child: Column(
+              spacing: AppSizes.spacingXs,
               mainAxisAlignment: .center,
               crossAxisAlignment: .start,
               children: [
                 AppText(
-                  localizations.byKey(product.titleKey),
-                  style: AppTextStyles.bodyRegular,
+                  localizations.byKey(
+                    product.titleKey ?? AppSettings.emptyString,
+                  ),
+                  style: AppTextStyles.bodyRegular(),
                   maxLines: AppSizes.productTitleMaxLines,
                   overflow: .ellipsis,
                 ),
-                const SizedBox(height: AppSizes.spacingXs),
                 AppText(
                   localizations.productPrice(price),
-                  style: AppTextStyles.bodyLarge.copyWith(
-                    color: AppColors.primary,
-                  ),
+                  style: AppTextStyles.bodyLarge(color: AppColors.primary),
                 ),
               ],
             ),
           ),
-          const SizedBox(width: AppSizes.spacingSm),
           _QuantityControl(
-            quantity: cartItem.quantity,
+            quantity: cartItem.quantity ?? 0,
             onIncrement: onIncrement,
             onDecrement: onDecrement,
           ),
@@ -107,14 +105,14 @@ class _QuantityControl extends StatelessWidget {
           IconButton(
             onPressed: onDecrement,
             tooltip: localizations.decreaseQuantityTooltip,
-            icon: const Icon(Icons.remove, color: AppColors.primary),
+            icon: const AppIcon.small(Icons.remove, color: AppColors.primary),
             visualDensity: .compact,
           ),
-          AppText('$quantity', style: AppTextStyles.bodyLarge),
+          AppText('$quantity', style: AppTextStyles.bodyLarge()),
           IconButton(
             onPressed: onIncrement,
             tooltip: localizations.increaseQuantityTooltip,
-            icon: const Icon(Icons.add, color: AppColors.primary),
+            icon: const AppIcon.small(Icons.add, color: AppColors.primary),
             visualDensity: .compact,
           ),
         ],

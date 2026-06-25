@@ -30,15 +30,16 @@ class CategoryCard extends StatelessWidget {
           child: Padding(
             padding: const .symmetric(horizontal: AppSizes.spacingLg),
             child: Row(
+              spacing: AppSizes.spacingMd,
               children: [
-                Icon(
+                AppIcon.small(
                   _iconFor(category.icon),
                   color: AppColors.primary,
-                  size: AppSizes.categoryCardIconSize,
                 ),
-                const SizedBox(width: AppSizes.spacingMd),
-                Expanded(child: AppText(title, style: AppTextStyles.bodyLarge)),
-                Icon(
+                Expanded(
+                  child: AppText(title, style: AppTextStyles.bodyLarge()),
+                ),
+                AppIcon.small(
                   isExpanded ? Icons.keyboard_arrow_down : Icons.chevron_right,
                   color: AppColors.textSecondary,
                 ),
@@ -50,7 +51,7 @@ class CategoryCard extends StatelessWidget {
     );
   }
 
-  IconData _iconFor(CategoryIcon icon) {
+  IconData _iconFor(CategoryIcon? icon) {
     return switch (icon) {
       CategoryIcon.clothing => Icons.checkroom,
       CategoryIcon.shoes => Icons.hiking,
@@ -58,6 +59,7 @@ class CategoryCard extends StatelessWidget {
       CategoryIcon.electronics => Icons.devices,
       CategoryIcon.books => Icons.menu_book,
       CategoryIcon.home => Icons.home,
+      null => Icons.category_outlined,
     };
   }
 }

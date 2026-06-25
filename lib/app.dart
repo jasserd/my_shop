@@ -3,7 +3,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/navigation/navigation.dart';
 
-import 'core/l10n/l10n.dart';
+import 'package:my_shop/core/l10n/l10n.dart';
 
 class MyShopApp extends StatelessWidget {
   const MyShopApp({super.key});

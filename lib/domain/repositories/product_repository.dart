@@ -4,6 +4,7 @@ import 'package:my_shop/data/api/product_mock_api.dart';
 import 'package:my_shop/domain/entities/cart_item.dart';
 import 'package:my_shop/domain/entities/category.dart';
 import 'package:my_shop/domain/entities/product.dart';
+import 'package:my_shop/domain/entities/promo_banner.dart';
 import 'package:my_shop/domain/entities/story.dart';
 
 @lazySingleton
@@ -11,22 +12,28 @@ class ProductRepository {
   ProductRepository(this._api);
 
   final ProductMockApi _api;
-  final Map<String, bool> _favoriteOverrides = {};
-  final Map<String, bool> _cartOverrides = {};
-  final Map<String, int> _cartQuantities = {
+  final _favoriteOverrides = <String, bool>{};
+  final _cartOverrides = <String, bool>{};
+  final _cartQuantities = <String, int>{
     MockDataConstants.initialCartFirstProductId:
         MockDataConstants.initialCartFirstQuantity,
     MockDataConstants.initialCartSecondProductId:
         MockDataConstants.initialCartSecondQuantity,
   };
-  final Map<String, Product> _addedCartProducts = {};
+  final _addedCartProducts = <String, Product>{};
 
-  Future<({List<Story> stories, List<Product> products})> getHome() async {
+  Future<
+    ({List<Story> stories, List<PromoBanner> banners, List<Product> products})
+  >
+  getHome() async {
     final response = await _api.getHome();
 
     return (
-      stories: response.stories,
-      products: response.products.map(_applyOverrides).toList(growable: false),
+      stories: response.stories ?? const [],
+      banners: response.banners ?? const [],
+      products: (response.products ?? const [])
+          .map(_applyOverrides)
+          .toList(growable: false),
     );
   }
 
@@ -35,8 +42,9 @@ class ProductRepository {
 
     return List.unmodifiable(
       response.products
-          .map(_applyOverrides)
-          .where((product) => product.isFavorite),
+              ?.map(_applyOverrides)
+              .where((product) => product.isFavorite == true) ??
+          const [],
     );
   }
 
@@ -51,14 +59,22 @@ class ProductRepository {
 
   Future<List<CartItem>> getCartItems() async {
     final response = await _api.getHome();
-    final homeProducts = response.products.map(_applyOverrides);
-    final products = {
-      for (final product in homeProducts)
-        if (product.isInCart) product.id: product,
-      for (final product in _addedCartProducts.values)
-        if (_cartOverrides[product.id] ?? product.isInCart)
-          product.id: _applyOverrides(product),
-    };
+    final homeProducts = (response.products ?? const []).map(_applyOverrides);
+    final products = <String, Product>{};
+
+    for (final product in homeProducts) {
+      if (product.isInCart == true) {
+        products[product.id ?? AppSettings.emptyString] = product;
+      }
+    }
+
+    for (final product in _addedCartProducts.values) {
+      if (_cartOverrides[product.id] ?? product.isInCart ?? false) {
+        products[product.id ?? AppSettings.emptyString] = _applyOverrides(
+          product,
+        );
+      }
+    }
 
     return products.values
         .map(
@@ -72,43 +88,49 @@ class ProductRepository {
   }
 
   Product toggleFavorite(Product product) {
-    final updatedProduct = product.copyWith(isFavorite: !product.isFavorite);
-    _favoriteOverrides[product.id] = updatedProduct.isFavorite;
+    final productId = product.id ?? AppSettings.emptyString;
+    final updatedProduct = product.copyWith(
+      isFavorite: product.isFavorite != true,
+    );
+    _favoriteOverrides[productId] = updatedProduct.isFavorite ?? false;
     return updatedProduct;
   }
 
   Product toggleCart(Product product) {
-    final updatedProduct = product.copyWith(isInCart: !product.isInCart);
-    _cartOverrides[product.id] = updatedProduct.isInCart;
-    if (updatedProduct.isInCart) {
+    final productId = product.id ?? AppSettings.emptyString;
+    final updatedProduct = product.copyWith(isInCart: product.isInCart != true);
+    _cartOverrides[productId] = updatedProduct.isInCart ?? false;
+    if (updatedProduct.isInCart == true) {
       _cartQuantities.putIfAbsent(
-        product.id,
+        productId,
         () => AppSettings.defaultCartQuantity,
       );
-      _addedCartProducts[product.id] = updatedProduct;
+      _addedCartProducts[productId] = updatedProduct;
     } else {
-      _cartQuantities.remove(product.id);
-      _addedCartProducts.remove(product.id);
+      _cartQuantities.remove(productId);
+      _addedCartProducts.remove(productId);
     }
     return updatedProduct;
   }
 
   CartItem incrementCartItem(CartItem cartItem) {
-    final quantity = cartItem.quantity + AppSettings.defaultCartQuantity;
-    _cartQuantities[cartItem.product.id] = quantity;
+    final productId = cartItem.product?.id ?? AppSettings.emptyString;
+    final quantity = (cartItem.quantity ?? 0) + AppSettings.defaultCartQuantity;
+    _cartQuantities[productId] = quantity;
     return cartItem.copyWith(quantity: quantity);
   }
 
   CartItem? decrementCartItem(CartItem cartItem) {
-    final quantity = cartItem.quantity - AppSettings.defaultCartQuantity;
+    final productId = cartItem.product?.id ?? AppSettings.emptyString;
+    final quantity = (cartItem.quantity ?? 0) - AppSettings.defaultCartQuantity;
     if (quantity <= AppSettings.minimumCartQuantity) {
-      _cartQuantities.remove(cartItem.product.id);
-      _cartOverrides[cartItem.product.id] = false;
-      _addedCartProducts.remove(cartItem.product.id);
+      _cartQuantities.remove(productId);
+      _cartOverrides[productId] = false;
+      _addedCartProducts.remove(productId);
       return null;
     }
 
-    _cartQuantities[cartItem.product.id] = quantity;
+    _cartQuantities[productId] = quantity;
     return cartItem.copyWith(quantity: quantity);
   }
 
@@ -121,9 +143,10 @@ class ProductRepository {
   }
 
   Product _applyOverrides(Product product) {
+    final productId = product.id ?? AppSettings.emptyString;
     return product.copyWith(
-      isFavorite: _favoriteOverrides[product.id] ?? product.isFavorite,
-      isInCart: _cartOverrides[product.id] ?? product.isInCart,
+      isFavorite: _favoriteOverrides[productId] ?? product.isFavorite ?? false,
+      isInCart: _cartOverrides[productId] ?? product.isInCart ?? false,
     );
   }
 }

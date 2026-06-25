@@ -6,7 +6,6 @@ export 'app_settings.dart';
 export 'app_sizes.dart';
 export 'app_text_styles.dart';
 export 'app_theme.dart';
-export 'error_codes.dart';
 export 'localization_keys.dart';
 export 'mock_data_constants.dart';
 export 'remote_images.dart';

@@ -4,15 +4,10 @@ part 'story.mapper.dart';
 
 @MappableClass()
 class Story with StoryMappable {
-  const Story({
-    required this.id,
-    required this.titleKey,
-    required this.imageUrl,
-    this.isViewed = false,
-  });
+  const Story({this.id, this.titleKey, this.imageUrl, this.isViewed});
 
-  final String id;
-  final String titleKey;
-  final String imageUrl;
-  final bool isViewed;
+  final String? id;
+  final String? titleKey;
+  final String? imageUrl;
+  final bool? isViewed;
 }
