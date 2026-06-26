@@ -4,11 +4,7 @@ import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class CustomBottomNavBar extends StatelessWidget {
-  const CustomBottomNavBar({
-    required this.selectedIndex,
-    required this.onDestinationSelected,
-    super.key,
-  });
+  const CustomBottomNavBar({required this.selectedIndex, required this.onDestinationSelected, super.key});
 
   final int selectedIndex;
   final ValueChanged<int> onDestinationSelected;
@@ -53,12 +49,7 @@ class CustomBottomNavBar extends StatelessWidget {
 }
 
 class _NavigationItem extends StatelessWidget {
-  const _NavigationItem({
-    required this.icon,
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-  });
+  const _NavigationItem({required this.icon, required this.label, required this.isSelected, required this.onTap});
 
   final IconData icon;
   final String label;

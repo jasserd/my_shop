@@ -5,13 +5,7 @@ import 'package:my_shop/domain/entities/product.dart';
 part 'catalog_state.mapper.dart';
 
 @MappableEnum()
-enum CatalogSortType {
-  none,
-  priceAscending,
-  priceDescending,
-  alphabetAscending,
-  alphabetDescending,
-}
+enum CatalogSortType { none, priceAscending, priceDescending, alphabetAscending, alphabetDescending }
 
 @MappableClass()
 class CategoryState with CategoryStateMappable {
@@ -30,11 +24,7 @@ class CategoryState with CategoryStateMappable {
 
 @MappableClass()
 class CatalogState with CatalogStateMappable {
-  const CatalogState({
-    this.isLoading = true,
-    this.categories = const [],
-    this.categoryStates = const {},
-  });
+  const CatalogState({this.isLoading = true, this.categories = const [], this.categoryStates = const {}});
 
   final bool isLoading;
   final List<Category> categories;

@@ -47,17 +47,12 @@ class PaymentResultContent extends StatelessWidget {
                 AppText(title, style: AppTextStyles.h1(), textAlign: .center),
                 AppText(
                   description,
-                  style: AppTextStyles.bodyRegular(
-                    color: AppColors.textSecondary,
-                  ),
+                  style: AppTextStyles.bodyRegular(color: AppColors.textSecondary),
                   textAlign: .center,
                 ),
               ],
             ),
-            AppButton(
-              text: localizations.goShoppingButton,
-              onPressed: onGoHome,
-            ),
+            AppButton(text: localizations.goShoppingButton, onPressed: onGoHome),
           ],
         ),
       ),

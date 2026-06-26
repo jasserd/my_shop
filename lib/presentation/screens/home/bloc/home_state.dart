@@ -7,12 +7,7 @@ part 'home_state.mapper.dart';
 
 @MappableClass()
 class HomeState with HomeStateMappable {
-  const HomeState({
-    this.stories = const [],
-    this.banners = const [],
-    this.products = const [],
-    this.isLoading = true,
-  });
+  const HomeState({this.stories = const [], this.banners = const [], this.products = const [], this.isLoading = true});
 
   final List<Story> stories;
   final List<PromoBanner> banners;

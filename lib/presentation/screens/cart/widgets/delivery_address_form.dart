@@ -5,11 +5,7 @@ import 'package:my_shop/domain/entities/delivery_address.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class DeliveryAddressForm extends StatelessWidget {
-  const DeliveryAddressForm({
-    required this.deliveryAddress,
-    required this.onChanged,
-    super.key,
-  });
+  const DeliveryAddressForm({required this.deliveryAddress, required this.onChanged, super.key});
 
   final DeliveryAddress deliveryAddress;
   final ValueChanged<DeliveryAddress> onChanged;

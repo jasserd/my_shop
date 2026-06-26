@@ -1,1 +1,1 @@
-export 'yookassa_payment_config.dart';
+export 'payment_config.dart';

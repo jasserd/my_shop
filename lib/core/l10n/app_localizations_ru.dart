@@ -138,8 +138,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get emptyFavoritesTitle => 'Список пуст';
 
   @override
-  String get emptyFavoritesDescription =>
-      'Сохраняйте товары, которые вам понравились, чтобы вернуться к ним позже.';
+  String get emptyFavoritesDescription => 'Сохраняйте товары, которые вам понравились, чтобы вернуться к ним позже.';
 
   @override
   String get goShoppingButton => 'Перейти к покупкам';
@@ -234,8 +233,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get productCandle => 'Ароматическая свеча «Сандал и Кожа»';
 
   @override
-  String get productLinen =>
-      'Комплект постельного белья из органического хлопка';
+  String get productLinen => 'Комплект постельного белья из органического хлопка';
 
   @override
   String get productBowl => 'Ваза для фруктов из массива ореха';
@@ -256,8 +254,7 @@ class AppLocalizationsRu extends AppLocalizations {
   String get bannerCollectionTitle => 'Сезонная\nколлекция';
 
   @override
-  String get bannerCollectionSubtitle =>
-      'Скидки до 30% на\nизбранные товары\ndекора';
+  String get bannerCollectionSubtitle => 'Скидки до 30% на\nизбранные товары\ndекора';
 
   @override
   String get bannerComfortTitle => 'Тёплый\nинтерьер';

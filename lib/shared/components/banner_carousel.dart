@@ -42,10 +42,7 @@ class _BannerCarouselState extends State<BannerCarousel> {
             },
           ),
         ),
-        _PageIndicator(
-          itemCount: widget.banners.length,
-          activeIndex: activeIndex,
-        ),
+        _PageIndicator(itemCount: widget.banners.length, activeIndex: activeIndex),
       ],
     );
   }
@@ -65,15 +62,8 @@ class _BannerItem extends StatelessWidget {
       child: Stack(
         fit: .expand,
         children: [
-          AppNetworkImage(
-            imageUrl: banner.imageUrl ?? AppSettings.emptyString,
-            fit: .cover,
-          ),
-          ColoredBox(
-            color: AppColors.surface.withValues(
-              alpha: AppOpacities.bannerOverlay,
-            ),
-          ),
+          AppNetworkImage(imageUrl: banner.imageUrl ?? AppSettings.emptyString, fit: .cover),
+          ColoredBox(color: AppColors.surface.withValues(alpha: AppOpacities.bannerOverlay)),
           Padding(
             padding: const .all(AppSizes.spacingXl),
             child: Row(
@@ -85,26 +75,17 @@ class _BannerItem extends StatelessWidget {
                     mainAxisAlignment: .center,
                     children: [
                       AppText(
-                        localizations.byKey(
-                          banner.titleKey ?? AppSettings.emptyString,
-                        ),
+                        localizations.byKey(banner.titleKey ?? AppSettings.emptyString),
                         style: AppTextStyles.h2(color: AppColors.primary),
                       ),
                       AppText(
-                        localizations.byKey(
-                          banner.subtitleKey ?? AppSettings.emptyString,
-                        ),
-                        style: AppTextStyles.bodyRegular(
-                          color: AppColors.textSecondary,
-                        ),
+                        localizations.byKey(banner.subtitleKey ?? AppSettings.emptyString),
+                        style: AppTextStyles.bodyRegular(color: AppColors.textSecondary),
                       ),
                     ],
                   ),
                 ),
-                const AppIcon.small(
-                  Icons.arrow_forward,
-                  color: AppColors.primary,
-                ),
+                const AppIcon.small(Icons.arrow_forward, color: AppColors.primary),
               ],
             ),
           ),
@@ -128,9 +109,7 @@ class _PageIndicator extends StatelessWidget {
         itemCount,
         (index) => AnimatedContainer(
           duration: AppSettings.shortAnimationDuration,
-          width: index == activeIndex
-              ? AppSizes.bannerIndicatorActiveWidth
-              : AppSizes.bannerIndicatorInactiveWidth,
+          width: index == activeIndex ? AppSizes.bannerIndicatorActiveWidth : AppSizes.bannerIndicatorInactiveWidth,
           height: AppSizes.bannerIndicatorHeight,
           margin: const .symmetric(horizontal: AppSizes.bannerIndicatorSpacing),
           decoration: _indicatorDecoration(index),

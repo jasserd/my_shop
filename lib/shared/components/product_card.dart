@@ -24,9 +24,7 @@ class ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final formattedPrice = NumberFormat.decimalPattern(
-      AppSettings.numberFormatLocale,
-    ).format(product.price ?? 0);
+    final formattedPrice = NumberFormat.decimalPattern(AppSettings.numberFormatLocale).format(product.price ?? 0);
 
     return Material(
       color: AppColors.background,
@@ -44,10 +42,7 @@ class ProductCard extends StatelessWidget {
                 children: [
                   ClipRRect(
                     borderRadius: const .all(.circular(AppSizes.radiusMedium)),
-                    child: AppNetworkImage(
-                      imageUrl: product.imageUrl ?? AppSettings.emptyString,
-                      fit: .cover,
-                    ),
+                    child: AppNetworkImage(imageUrl: product.imageUrl ?? AppSettings.emptyString, fit: .cover),
                   ),
                   Positioned(
                     top: AppSizes.spacingSm,
@@ -58,21 +53,15 @@ class ProductCard extends StatelessWidget {
                       children: [
                         _ProductAction(
                           icon: Icons.shopping_cart,
-                          color: product.isInCart == true
-                              ? AppColors.primary
-                              : AppColors.textSecondary,
+                          color: product.isInCart == true ? AppColors.primary : AppColors.textSecondary,
                           tooltip: product.isInCart == true
                               ? localizations.removeFromCartTooltip
                               : localizations.addToCartTooltip,
                           onTap: onCartTap,
                         ),
                         _ProductAction(
-                          icon: product.isFavorite == true
-                              ? Icons.favorite
-                              : Icons.favorite_border,
-                          color: product.isFavorite == true
-                              ? AppColors.primary
-                              : AppColors.textSecondary,
+                          icon: product.isFavorite == true ? Icons.favorite : Icons.favorite_border,
+                          color: product.isFavorite == true ? AppColors.primary : AppColors.textSecondary,
                           tooltip: product.isFavorite == true
                               ? localizations.removeFromFavoritesTooltip
                               : localizations.addToFavoritesTooltip,
@@ -96,9 +85,7 @@ class ProductCard extends StatelessWidget {
                 ),
                 AppText(
                   localizations.productPrice(formattedPrice),
-                  style: AppTextStyles.bodyLarge(
-                    color: AppColors.primary,
-                  ).copyWith(fontWeight: .w600),
+                  style: AppTextStyles.bodyLarge(color: AppColors.primary).copyWith(fontWeight: .w600),
                 ),
               ],
             ),
@@ -110,12 +97,7 @@ class ProductCard extends StatelessWidget {
 }
 
 class _ProductAction extends StatelessWidget {
-  const _ProductAction({
-    required this.icon,
-    required this.color,
-    required this.tooltip,
-    required this.onTap,
-  });
+  const _ProductAction({required this.icon, required this.color, required this.tooltip, required this.onTap});
 
   final IconData icon;
   final Color color;

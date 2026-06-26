@@ -1,6 +1,5 @@
 abstract final class RemoteImages {
-  static const common =
-      'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg';
+  static const common = 'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl.jpg';
 
   static const storyNew = common;
   static const storyDecor = common;

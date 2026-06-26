@@ -6,9 +6,10 @@ import 'package:my_shop/domain/repositories/product_repository.dart';
 import 'package:my_shop/presentation/screens/favorites/bloc/favorites_state.dart';
 import 'package:my_shop/shared/base/base.dart';
 
-class FavoritesCubit extends Cubit<FavoritesState>
-    with ProductActionsMixin<FavoritesState> {
-  FavoritesCubit() : super(const FavoritesState());
+class FavoritesCubit extends Cubit<FavoritesState> with ProductActionsMixin<FavoritesState> {
+  FavoritesCubit() : super(const FavoritesState()) {
+    listenProductUpdates();
+  }
 
   final _repository = getIt.get<ProductRepository>();
 
@@ -22,15 +23,14 @@ class FavoritesCubit extends Cubit<FavoritesState>
   }
 
   @override
-  void onProductAction(
-    Product updatedProduct, {
-    required ProductAction action,
-    String? scopeId,
-  }) {
-    final favorites = switch (action) {
-      ProductAction.favorite => state.favorites.removeById(updatedProduct.id),
-      ProductAction.cart => state.favorites.replaceById(updatedProduct),
-    };
+  void onProductUpdated(Product updatedProduct) {
+    if (updatedProduct.isFavorite != true) {
+      emit(state.copyWith(favorites: state.favorites.removeById(updatedProduct.id)));
+      return;
+    }
+
+    final hasProduct = state.favorites.any((favorite) => favorite.id == updatedProduct.id);
+    final favorites = hasProduct ? state.favorites.replaceById(updatedProduct) : [...state.favorites, updatedProduct];
 
     emit(state.copyWith(favorites: favorites));
   }

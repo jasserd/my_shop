@@ -20,10 +20,7 @@ final appRouter = GoRouter(
   routes: [
     GoRoute(
       path: AppRoutes.auth,
-      builder: (context, state) => BlocProvider(
-        create: (context) => AuthCubit(),
-        child: const AuthScreen(),
-      ),
+      builder: (context, state) => BlocProvider(create: (context) => AuthCubit(), child: const AuthScreen()),
     ),
     StatefulShellRoute.indexedStack(
       builder: (context, state, navigationShell) {
@@ -34,10 +31,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.home,
-              builder: (context, state) => BlocProvider(
-                create: (context) => HomeCubit()..load(),
-                child: const HomeScreen(),
-              ),
+              builder: (context, state) =>
+                  BlocProvider(create: (context) => HomeCubit()..load(), child: const HomeScreen()),
             ),
           ],
         ),
@@ -45,10 +40,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.catalog,
-              builder: (context, state) => BlocProvider(
-                create: (context) => CatalogCubit()..load(),
-                child: const CatalogScreen(),
-              ),
+              builder: (context, state) =>
+                  BlocProvider(create: (context) => CatalogCubit()..load(), child: const CatalogScreen()),
             ),
           ],
         ),
@@ -56,10 +49,8 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.favorites,
-              builder: (context, state) => BlocProvider(
-                create: (context) => FavoritesCubit()..load(),
-                child: const FavoritesScreen(),
-              ),
+              builder: (context, state) =>
+                  BlocProvider(create: (context) => FavoritesCubit()..load(), child: const FavoritesScreen()),
             ),
           ],
         ),
@@ -67,19 +58,11 @@ final appRouter = GoRouter(
           routes: [
             GoRoute(
               path: AppRoutes.cart,
-              builder: (context, state) => BlocProvider(
-                create: (context) => CartCubit()..load(),
-                child: const CartScreen(),
-              ),
+              builder: (context, state) =>
+                  BlocProvider(create: (context) => CartCubit()..load(), child: const CartScreen()),
             ),
-            GoRoute(
-              path: AppRoutes.payment,
-              builder: (context, state) => const PaymentScreen(),
-            ),
-            GoRoute(
-              path: AppRoutes.paymentFailure,
-              builder: (context, state) => const PaymentFailureScreen(),
-            ),
+            GoRoute(path: AppRoutes.payment, builder: (context, state) => const PaymentScreen()),
+            GoRoute(path: AppRoutes.paymentFailure, builder: (context, state) => const PaymentFailureScreen()),
           ],
         ),
       ],

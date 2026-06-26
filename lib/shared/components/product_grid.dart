@@ -25,16 +25,11 @@ class ProductGrid extends StatelessWidget {
 
     return SliverGrid(
       gridDelegate: _gridDelegate,
-      delegate: SliverChildBuilderDelegate(childCount: products.length, (
-        context,
-        index,
-      ) {
+      delegate: SliverChildBuilderDelegate(childCount: products.length, (context, index) {
         final product = products[index];
         return ProductCard(
           product: product,
-          title: localizations.byKey(
-            product.titleKey ?? AppSettings.emptyString,
-          ),
+          title: localizations.byKey(product.titleKey ?? AppSettings.emptyString),
           onTap: () => onProductTap(product),
           onFavoriteTap: () => onFavoriteTap(product),
           onCartTap: () => onCartTap(product),

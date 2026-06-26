@@ -4,14 +4,7 @@ part 'product.mapper.dart';
 
 @MappableClass()
 class Product with ProductMappable {
-  const Product({
-    this.id,
-    this.titleKey,
-    this.imageUrl,
-    this.price,
-    this.isFavorite,
-    this.isInCart,
-  });
+  const Product({this.id, this.titleKey, this.imageUrl, this.price, this.isFavorite, this.isInCart});
 
   factory Product.fromJson(Map<String, Object?> json) {
     return ProductMapper.fromMap(Map<String, dynamic>.from(json));

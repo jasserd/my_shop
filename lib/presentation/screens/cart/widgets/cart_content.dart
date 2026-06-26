@@ -53,10 +53,7 @@ class _FilledCart extends StatelessWidget {
     }
     cartChildren.addAll([
       const SizedBox(height: AppSizes.spacingMd),
-      DeliveryAddressForm(
-        deliveryAddress: state.deliveryAddress,
-        onChanged: cartCubit.deliveryAddressChanged,
-      ),
+      DeliveryAddressForm(deliveryAddress: state.deliveryAddress, onChanged: cartCubit.deliveryAddressChanged),
     ]);
 
     return Stack(
@@ -92,7 +89,7 @@ class _FilledCart extends StatelessWidget {
       subtitle: localizations.paymentOrderSubtitle,
     );
 
-    if (context.mounted == false) {
+    if (!context.mounted) {
       return;
     }
 
@@ -120,18 +117,9 @@ class _EmptyCart extends StatelessWidget {
           spacing: AppSizes.spacingXl,
           mainAxisSize: .min,
           children: [
-            const AppIcon.large(
-              Icons.shopping_cart_outlined,
-              color: AppColors.border,
-            ),
-            AppText(
-              localizations.emptyCartTitle,
-              style: AppTextStyles.bodyLarge(color: AppColors.textSecondary),
-            ),
-            AppButton(
-              text: localizations.goShoppingButton,
-              onPressed: () => context.go(AppRoutes.home),
-            ),
+            const AppIcon.large(Icons.shopping_cart_outlined, color: AppColors.border),
+            AppText(localizations.emptyCartTitle, style: AppTextStyles.bodyLarge(color: AppColors.textSecondary)),
+            AppButton(text: localizations.goShoppingButton, onPressed: () => context.go(AppRoutes.home)),
           ],
         ),
       ),

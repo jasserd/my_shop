@@ -16,17 +16,13 @@ class ProductRepository {
   final _favoriteOverrides = <String, bool>{};
   final _cartOverrides = <String, bool>{};
   final _cartQuantities = <String, int>{
-    MockDataConstants.initialCartFirstProductId:
-        MockDataConstants.initialCartFirstQuantity,
-    MockDataConstants.initialCartSecondProductId:
-        MockDataConstants.initialCartSecondQuantity,
+    MockDataConstants.initialCartFirstProductId: MockDataConstants.initialCartFirstQuantity,
+    MockDataConstants.initialCartSecondProductId: MockDataConstants.initialCartSecondQuantity,
   };
+  final _addedFavoriteProducts = <String, Product>{};
   final _addedCartProducts = <String, Product>{};
 
-  Future<
-    ({List<Story> stories, List<PromoBanner> banners, List<Product> products})
-  >
-  getHome() async {
+  Future<({List<Story> stories, List<PromoBanner> banners, List<Product> products})> getHome() async {
     final response = await _api.getHome();
 
     return (
@@ -38,10 +34,21 @@ class ProductRepository {
 
   Future<List<Product>> getFavorites() async {
     final products = await _getHomeProducts();
+    final favorites = <String, Product>{};
 
-    return List.unmodifiable(
-      products.where((product) => product.isFavorite == true),
-    );
+    for (final product in products) {
+      if (product.isFavorite == true) {
+        favorites[product.id ?? AppSettings.emptyString] = product;
+      }
+    }
+
+    for (final product in _addedFavoriteProducts.values) {
+      if (_favoriteOverrides[product.id] ?? product.isFavorite ?? false) {
+        favorites[product.id ?? AppSettings.emptyString] = _applyOverrides(product);
+      }
+    }
+
+    return favorites.values.toList(growable: false);
   }
 
   Future<List<Category>> getCategories() {
@@ -65,29 +72,27 @@ class ProductRepository {
 
     for (final product in _addedCartProducts.values) {
       if (_cartOverrides[product.id] ?? product.isInCart ?? false) {
-        products[product.id ?? AppSettings.emptyString] = _applyOverrides(
-          product,
-        );
+        products[product.id ?? AppSettings.emptyString] = _applyOverrides(product);
       }
     }
 
     return products.values
         .map(
-          (product) => CartItem(
-            product: product,
-            quantity:
-                _cartQuantities[product.id] ?? AppSettings.defaultCartQuantity,
-          ),
+          (product) =>
+              CartItem(product: product, quantity: _cartQuantities[product.id] ?? AppSettings.defaultCartQuantity),
         )
         .toList(growable: false);
   }
 
   Product toggleFavorite(Product product) {
     final productId = product.id ?? AppSettings.emptyString;
-    final updatedProduct = product.copyWith(
-      isFavorite: product.isFavorite != true,
-    );
+    final updatedProduct = product.copyWith(isFavorite: product.isFavorite != true);
     _favoriteOverrides[productId] = updatedProduct.isFavorite ?? false;
+    if (updatedProduct.isFavorite == true) {
+      _addedFavoriteProducts[productId] = updatedProduct;
+    } else {
+      _addedFavoriteProducts.remove(productId);
+    }
     return updatedProduct;
   }
 
@@ -96,10 +101,7 @@ class ProductRepository {
     final updatedProduct = product.copyWith(isInCart: product.isInCart != true);
     _cartOverrides[productId] = updatedProduct.isInCart ?? false;
     if (updatedProduct.isInCart == true) {
-      _cartQuantities.putIfAbsent(
-        productId,
-        () => AppSettings.defaultCartQuantity,
-      );
+      _cartQuantities.putIfAbsent(productId, () => AppSettings.defaultCartQuantity);
       _addedCartProducts[productId] = updatedProduct;
     } else {
       _cartQuantities.remove(productId);
@@ -147,8 +149,6 @@ class ProductRepository {
 
   Future<List<Product>> _getHomeProducts([HomeFeed? homeFeed]) async {
     final response = homeFeed ?? await _api.getHome();
-    return (response.products ?? const [])
-        .map(_applyOverrides)
-        .toList(growable: false);
+    return (response.products ?? const []).map(_applyOverrides).toList(growable: false);
   }
 }

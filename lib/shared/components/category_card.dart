@@ -32,13 +32,8 @@ class CategoryCard extends StatelessWidget {
             child: Row(
               spacing: AppSizes.spacingMd,
               children: [
-                AppIcon.small(
-                  _iconFor(category.icon),
-                  color: AppColors.primary,
-                ),
-                Expanded(
-                  child: AppText(title, style: AppTextStyles.bodyLarge()),
-                ),
+                AppIcon.small(_iconFor(category.icon), color: AppColors.primary),
+                Expanded(child: AppText(title, style: AppTextStyles.bodyLarge())),
                 AppIcon.small(
                   isExpanded ? Icons.keyboard_arrow_down : Icons.chevron_right,
                   color: AppColors.textSecondary,

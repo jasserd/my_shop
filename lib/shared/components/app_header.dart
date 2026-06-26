@@ -3,13 +3,7 @@ import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class AppHeader extends StatelessWidget {
-  const AppHeader({
-    required this.title,
-    this.actionIcon,
-    this.actionTooltip,
-    this.onActionPressed,
-    super.key,
-  });
+  const AppHeader({required this.title, this.actionIcon, this.actionTooltip, this.onActionPressed, super.key});
 
   final String title;
   final IconData? actionIcon;
@@ -27,10 +21,7 @@ class AppHeader extends StatelessWidget {
             padding: const .symmetric(horizontal: AppSizes.screenPadding),
             child: Row(
               children: [
-                AppText(
-                  title,
-                  style: AppTextStyles.h1(color: AppColors.primary),
-                ),
+                AppText(title, style: AppTextStyles.h1(color: AppColors.primary)),
                 const Spacer(),
                 ...switch (actionIcon) {
                   final icon? => [
@@ -46,10 +37,7 @@ class AppHeader extends StatelessWidget {
             ),
           ),
         ),
-        const Divider(
-          height: AppSizes.dividerThickness,
-          color: AppColors.border,
-        ),
+        const Divider(height: AppSizes.dividerThickness, color: AppColors.border),
       ],
     );
   }

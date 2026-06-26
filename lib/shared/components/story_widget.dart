@@ -4,12 +4,7 @@ import 'package:my_shop/domain/entities/story.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class StoryWidget extends StatelessWidget {
-  const StoryWidget({
-    required this.story,
-    required this.title,
-    required this.onTap,
-    super.key,
-  });
+  const StoryWidget({required this.story, required this.title, required this.onTap, super.key});
 
   final Story story;
   final String title;
@@ -31,10 +26,7 @@ class StoryWidget extends StatelessWidget {
               padding: const .all(AppSizes.storyRingPadding),
               decoration: _storyDecoration,
               child: ClipOval(
-                child: AppNetworkImage(
-                  imageUrl: story.imageUrl ?? AppSettings.emptyString,
-                  fit: .cover,
-                ),
+                child: AppNetworkImage(imageUrl: story.imageUrl ?? AppSettings.emptyString, fit: .cover),
               ),
             ),
             AppText(
@@ -55,9 +47,7 @@ class StoryWidget extends StatelessWidget {
       shape: .circle,
       border: Border.all(
         color: story.isViewed == true ? AppColors.border : AppColors.primary,
-        width: story.isViewed == true
-            ? AppSizes.borderThin
-            : AppSizes.borderRegular,
+        width: story.isViewed == true ? AppSizes.borderThin : AppSizes.borderRegular,
       ),
     );
   }

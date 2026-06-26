@@ -19,9 +19,7 @@ class CartCheckoutPanel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
-    final price = NumberFormat.decimalPattern(
-      AppSettings.numberFormatLocale,
-    ).format(totalPrice);
+    final price = NumberFormat.decimalPattern(AppSettings.numberFormatLocale).format(totalPrice);
 
     return Container(
       padding: const .all(AppSizes.spacingLg),
@@ -32,22 +30,11 @@ class CartCheckoutPanel extends StatelessWidget {
         children: [
           Row(
             children: [
-              Expanded(
-                child: AppText(
-                  localizations.totalPaymentLabel,
-                  style: AppTextStyles.bodyLarge(),
-                ),
-              ),
-              AppText(
-                localizations.productPrice(price),
-                style: AppTextStyles.h2(color: AppColors.primary),
-              ),
+              Expanded(child: AppText(localizations.totalPaymentLabel, style: AppTextStyles.bodyLarge())),
+              AppText(localizations.productPrice(price), style: AppTextStyles.h2(color: AppColors.primary)),
             ],
           ),
-          AppButton(
-            text: localizations.checkoutButton,
-            onPressed: isCheckoutEnabled ? onCheckout : null,
-          ),
+          AppButton(text: localizations.checkoutButton, onPressed: isCheckoutEnabled ? onCheckout : null),
         ],
       ),
     );

@@ -4,13 +4,7 @@ part 'delivery_address.mapper.dart';
 
 @MappableClass()
 class DeliveryAddress with DeliveryAddressMappable {
-  const DeliveryAddress({
-    this.city,
-    this.street,
-    this.house,
-    this.apartment,
-    this.postalCode,
-  });
+  const DeliveryAddress({this.city, this.street, this.house, this.apartment, this.postalCode});
 
   final String? city;
   final String? street;

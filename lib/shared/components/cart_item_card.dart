@@ -8,12 +8,7 @@ import 'package:my_shop/domain/entities/product.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class CartItemCard extends StatelessWidget {
-  const CartItemCard({
-    required this.cartItem,
-    required this.onIncrement,
-    required this.onDecrement,
-    super.key,
-  });
+  const CartItemCard({required this.cartItem, required this.onIncrement, required this.onDecrement, super.key});
 
   final CartItem cartItem;
   final VoidCallback onIncrement;
@@ -23,9 +18,7 @@ class CartItemCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final product = cartItem.product ?? const Product();
-    final price = NumberFormat.decimalPattern(
-      AppSettings.numberFormatLocale,
-    ).format(product.price ?? 0);
+    final price = NumberFormat.decimalPattern(AppSettings.numberFormatLocale).format(product.price ?? 0);
 
     return Container(
       height: AppSizes.cartItemHeight,
@@ -50,25 +43,16 @@ class CartItemCard extends StatelessWidget {
               crossAxisAlignment: .start,
               children: [
                 AppText(
-                  localizations.byKey(
-                    product.titleKey ?? AppSettings.emptyString,
-                  ),
+                  localizations.byKey(product.titleKey ?? AppSettings.emptyString),
                   style: AppTextStyles.bodyRegular(),
                   maxLines: AppSizes.productTitleMaxLines,
                   overflow: .ellipsis,
                 ),
-                AppText(
-                  localizations.productPrice(price),
-                  style: AppTextStyles.bodyLarge(color: AppColors.primary),
-                ),
+                AppText(localizations.productPrice(price), style: AppTextStyles.bodyLarge(color: AppColors.primary)),
               ],
             ),
           ),
-          _QuantityControl(
-            quantity: cartItem.quantity ?? 0,
-            onIncrement: onIncrement,
-            onDecrement: onDecrement,
-          ),
+          _QuantityControl(quantity: cartItem.quantity ?? 0, onIncrement: onIncrement, onDecrement: onDecrement),
         ],
       ),
     );
@@ -84,11 +68,7 @@ class CartItemCard extends StatelessWidget {
 }
 
 class _QuantityControl extends StatelessWidget {
-  const _QuantityControl({
-    required this.quantity,
-    required this.onIncrement,
-    required this.onDecrement,
-  });
+  const _QuantityControl({required this.quantity, required this.onIncrement, required this.onDecrement});
 
   final int quantity;
   final VoidCallback onIncrement;
@@ -122,9 +102,6 @@ class _QuantityControl extends StatelessWidget {
   }
 
   BoxDecoration get _decoration {
-    return const BoxDecoration(
-      color: AppColors.surface,
-      borderRadius: .all(.circular(AppSizes.radiusMedium)),
-    );
+    return const BoxDecoration(color: AppColors.surface, borderRadius: .all(.circular(AppSizes.radiusMedium)));
   }
 }

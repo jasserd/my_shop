@@ -5,12 +5,7 @@ import 'package:my_shop/presentation/screens/catalog/bloc/catalog_state.dart';
 import 'package:my_shop/shared/widgets/widgets.dart';
 
 class CategorySortTags extends StatelessWidget {
-  const CategorySortTags({
-    required this.activeSort,
-    required this.onPriceTap,
-    required this.onAlphabetTap,
-    super.key,
-  });
+  const CategorySortTags({required this.activeSort, required this.onPriceTap, required this.onAlphabetTap, super.key});
 
   final CatalogSortType activeSort;
   final VoidCallback onPriceTap;
@@ -20,8 +15,7 @@ class CategorySortTags extends StatelessWidget {
   Widget build(BuildContext context) {
     final localizations = AppLocalizations.of(context);
     final isPriceAscending = activeSort != CatalogSortType.priceDescending;
-    final isAlphabetAscending =
-        activeSort != CatalogSortType.alphabetDescending;
+    final isAlphabetAscending = activeSort != CatalogSortType.alphabetDescending;
 
     return SizedBox(
       height: AppSizes.sortTagsViewportHeight,
@@ -31,19 +25,14 @@ class CategorySortTags extends StatelessWidget {
           _SortTag(
             label: localizations.sortByPrice,
             icon: isPriceAscending ? Icons.arrow_upward : Icons.arrow_downward,
-            isSelected:
-                activeSort == CatalogSortType.priceAscending ||
-                activeSort == CatalogSortType.priceDescending,
+            isSelected: activeSort == CatalogSortType.priceAscending || activeSort == CatalogSortType.priceDescending,
             onTap: onPriceTap,
           ),
           const SizedBox(width: AppSizes.spacingSm),
           _SortTag(
-            label: isAlphabetAscending
-                ? localizations.sortAlphabetAscending
-                : localizations.sortAlphabetDescending,
+            label: isAlphabetAscending ? localizations.sortAlphabetAscending : localizations.sortAlphabetDescending,
             isSelected:
-                activeSort == CatalogSortType.alphabetAscending ||
-                activeSort == CatalogSortType.alphabetDescending,
+                activeSort == CatalogSortType.alphabetAscending || activeSort == CatalogSortType.alphabetDescending,
             onTap: onAlphabetTap,
           ),
         ],
@@ -53,12 +42,7 @@ class CategorySortTags extends StatelessWidget {
 }
 
 class _SortTag extends StatelessWidget {
-  const _SortTag({
-    required this.label,
-    required this.isSelected,
-    required this.onTap,
-    this.icon,
-  });
+  const _SortTag({required this.label, required this.isSelected, required this.onTap, this.icon});
 
   final String label;
   final IconData? icon;
@@ -67,9 +51,7 @@ class _SortTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final foregroundColor = isSelected
-        ? AppColors.background
-        : AppColors.textPrimary;
+    final foregroundColor = isSelected ? AppColors.background : AppColors.textPrimary;
 
     return Material(
       color: isSelected ? AppColors.primary : AppColors.surface,
@@ -86,10 +68,7 @@ class _SortTag extends StatelessWidget {
             spacing: AppSizes.spacingXs,
             mainAxisSize: .min,
             children: [
-              AppText(
-                label,
-                style: AppTextStyles.bodyRegular(color: foregroundColor),
-              ),
+              AppText(label, style: AppTextStyles.bodyRegular(color: foregroundColor)),
               ...switch (icon) {
                 final icon? => [AppIcon.small(icon, color: foregroundColor)],
                 null => const [],

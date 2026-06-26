@@ -8,9 +8,10 @@ import 'package:my_shop/domain/repositories/product_repository.dart';
 import 'package:my_shop/presentation/screens/catalog/bloc/catalog_state.dart';
 import 'package:my_shop/shared/base/base.dart';
 
-class CatalogCubit extends Cubit<CatalogState>
-    with ProductActionsMixin<CatalogState> {
-  CatalogCubit() : super(const CatalogState());
+class CatalogCubit extends Cubit<CatalogState> with ProductActionsMixin<CatalogState> {
+  CatalogCubit() : super(const CatalogState()) {
+    listenProductUpdates();
+  }
 
   final _repository = getIt.get<ProductRepository>();
 
@@ -33,17 +34,13 @@ class CatalogCubit extends Cubit<CatalogState>
     _emitCategoryStates({...categoryStates, categoryId: const CategoryState()});
 
     final products = await productRepository.getCategoryProducts(categoryId);
-    if (state.categoryStates.containsKey(categoryId) == false) {
+    if (!state.categoryStates.containsKey(categoryId)) {
       return;
     }
 
     _updateCategory(
       categoryId,
-      (categoryState) => categoryState.copyWith(
-        products: products,
-        allProducts: products,
-        isLoading: false,
-      ),
+      (categoryState) => categoryState.copyWith(products: products, allProducts: products, isLoading: false),
     );
   }
 
@@ -67,23 +64,16 @@ class CatalogCubit extends Cubit<CatalogState>
     _updateCategory(categoryId, (categoryState) {
       final products = switch (sortType) {
         CatalogSortType.none => categoryState.allProducts,
-        CatalogSortType.priceAscending => [
+        CatalogSortType.priceAscending => [...categoryState.allProducts]..sortBy((product) => product.price ?? 0),
+        CatalogSortType.priceDescending => ([
           ...categoryState.allProducts,
-        ]..sortBy((product) => product.price ?? 0),
-        CatalogSortType.priceDescending =>
-          ([...categoryState.allProducts]
-                ..sortBy((product) => product.price ?? 0))
-              .reversed
-              .toList(growable: false),
+        ]..sortBy((product) => product.price ?? 0)).reversed.toList(growable: false),
         CatalogSortType.alphabetAscending => [
           ...categoryState.allProducts,
         ]..sortBy((product) => product.titleKey ?? AppSettings.emptyString),
-        CatalogSortType.alphabetDescending =>
-          ([...categoryState.allProducts]..sortBy(
-                (product) => product.titleKey ?? AppSettings.emptyString,
-              ))
-              .reversed
-              .toList(growable: false),
+        CatalogSortType.alphabetDescending => ([
+          ...categoryState.allProducts,
+        ]..sortBy((product) => product.titleKey ?? AppSettings.emptyString)).reversed.toList(growable: false),
       };
 
       return categoryState.copyWith(products: products, sortType: sortType);
@@ -91,36 +81,30 @@ class CatalogCubit extends Cubit<CatalogState>
   }
 
   @override
-  void onProductAction(
-    Product updatedProduct, {
-    required ProductAction action,
-    String? scopeId,
-  }) {
-    if (scopeId == null) {
+  void onProductUpdated(Product updatedProduct) {
+    if (state.categoryStates.isEmpty) {
       return;
     }
 
-    _updateCategory(scopeId, (categoryState) {
-      return categoryState.copyWith(
+    final categoryStates = <String, CategoryState>{};
+    for (final entry in state.categoryStates.entries) {
+      final categoryState = entry.value;
+      categoryStates[entry.key] = categoryState.copyWith(
         products: categoryState.products.replaceById(updatedProduct),
         allProducts: categoryState.allProducts.replaceById(updatedProduct),
       );
-    });
+    }
+
+    _emitCategoryStates(categoryStates);
   }
 
-  void _updateCategory(
-    String categoryId,
-    CategoryState Function(CategoryState categoryState) update,
-  ) {
+  void _updateCategory(String categoryId, CategoryState Function(CategoryState categoryState) update) {
     final categoryState = state.categoryStates[categoryId];
     if (categoryState == null) {
       return;
     }
 
-    _emitCategoryStates({
-      ...state.categoryStates,
-      categoryId: update(categoryState),
-    });
+    _emitCategoryStates({...state.categoryStates, categoryId: update(categoryState)});
   }
 
   void _emitCategoryStates(Map<String, CategoryState> categoryStates) {

@@ -65,24 +65,17 @@ class _EmptyFavorites extends StatelessWidget {
               children: [
                 AppText(
                   localizations.emptyFavoritesTitle,
-                  style: AppTextStyles.bodyLarge(
-                    color: AppColors.textSecondary,
-                  ),
+                  style: AppTextStyles.bodyLarge(color: AppColors.textSecondary),
                   textAlign: .center,
                 ),
                 AppText(
                   localizations.emptyFavoritesDescription,
-                  style: AppTextStyles.bodyRegular(
-                    color: AppColors.textSecondary,
-                  ),
+                  style: AppTextStyles.bodyRegular(color: AppColors.textSecondary),
                   textAlign: .center,
                 ),
               ],
             ),
-            AppButton(
-              text: localizations.goShoppingButton,
-              onPressed: () => context.go(AppRoutes.home),
-            ),
+            AppButton(text: localizations.goShoppingButton, onPressed: () => context.go(AppRoutes.home)),
           ],
         ),
       ),

@@ -3,12 +3,7 @@ import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/shared/widgets/app_text.dart';
 
 class AppButton extends StatelessWidget {
-  const AppButton({
-    required this.text,
-    required this.onPressed,
-    this.isLoading = false,
-    super.key,
-  });
+  const AppButton({required this.text, required this.onPressed, this.isLoading = false, super.key});
 
   final String text;
   final VoidCallback? onPressed;
@@ -25,18 +20,11 @@ class AppButton extends StatelessWidget {
         child: isLoading
             ? const SizedBox.square(
                 dimension: AppSizes.buttonLoaderSize,
-                child: CircularProgressIndicator(
-                  color: AppColors.background,
-                  strokeWidth: AppSizes.loaderStrokeWidth,
-                ),
+                child: CircularProgressIndicator(color: AppColors.background, strokeWidth: AppSizes.loaderStrokeWidth),
               )
             : AppText(
                 text,
-                style: AppTextStyles.button(
-                  color: onPressed == null
-                      ? AppColors.textSecondary
-                      : AppColors.background,
-                ),
+                style: AppTextStyles.button(color: onPressed == null ? AppColors.textSecondary : AppColors.background),
               ),
       ),
     );
@@ -47,11 +35,7 @@ class AppButton extends StatelessWidget {
       elevation: const WidgetStatePropertyAll(0),
       backgroundColor: WidgetStateProperty.resolveWith(_backgroundColor),
       foregroundColor: WidgetStateProperty.resolveWith(_foregroundColor),
-      shape: const WidgetStatePropertyAll(
-        RoundedRectangleBorder(
-          borderRadius: .all(.circular(AppSizes.radiusMedium)),
-        ),
-      ),
+      shape: const WidgetStatePropertyAll(RoundedRectangleBorder(borderRadius: .all(.circular(AppSizes.radiusMedium)))),
       textStyle: WidgetStatePropertyAll(AppTextStyles.button()),
     );
   }

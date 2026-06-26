@@ -34,10 +34,7 @@ class _StoryViewer extends StatelessWidget {
         child: Stack(
           children: [
             Positioned.fill(
-              child: AppNetworkImage(
-                imageUrl: story.imageUrl ?? AppSettings.emptyString,
-                fit: .contain,
-              ),
+              child: AppNetworkImage(imageUrl: story.imageUrl ?? AppSettings.emptyString, fit: .contain),
             ),
             Positioned(
               top: AppSizes.spacingLg,
@@ -47,19 +44,14 @@ class _StoryViewer extends StatelessWidget {
                 children: [
                   Expanded(
                     child: AppText(
-                      localizations.byKey(
-                        story.titleKey ?? AppSettings.emptyString,
-                      ),
+                      localizations.byKey(story.titleKey ?? AppSettings.emptyString),
                       style: AppTextStyles.h2(color: AppColors.background),
                     ),
                   ),
                   IconButton(
                     onPressed: () => Navigator.of(context).pop(),
                     tooltip: localizations.closeStoryTooltip,
-                    icon: const AppIcon.small(
-                      Icons.close,
-                      color: AppColors.background,
-                    ),
+                    icon: const AppIcon.small(Icons.close, color: AppColors.background),
                   ),
                 ],
               ),

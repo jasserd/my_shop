@@ -23,11 +23,7 @@ class AuthScreen extends StatelessWidget {
             child: Column(
               mainAxisSize: .min,
               children: [
-                AppText(
-                  localizations.appName,
-                  style: AppTextStyles.h1(),
-                  textAlign: .center,
-                ),
+                AppText(localizations.appName, style: AppTextStyles.h1(), textAlign: .center),
                 const SizedBox(height: AppSizes.authTitleBottomSpacing),
                 Column(
                   spacing: AppSizes.spacingMd,
@@ -52,9 +48,7 @@ class AuthScreen extends StatelessWidget {
                   builder: (context, isButtonEnabled) {
                     return AppButton(
                       text: localizations.signInButton,
-                      onPressed: isButtonEnabled
-                          ? () => context.go(AppRoutes.home)
-                          : null,
+                      onPressed: isButtonEnabled ? () => context.go(AppRoutes.home) : null,
                     );
                   },
                 ),

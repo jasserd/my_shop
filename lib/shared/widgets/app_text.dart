@@ -2,14 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_shop/core/constants/constants.dart';
 
 class AppText extends StatelessWidget {
-  const AppText(
-    this.data, {
-    super.key,
-    this.style,
-    this.textAlign,
-    this.maxLines,
-    this.overflow,
-  });
+  const AppText(this.data, {super.key, this.style, this.textAlign, this.maxLines, this.overflow});
 
   final String data;
   final TextStyle? style;

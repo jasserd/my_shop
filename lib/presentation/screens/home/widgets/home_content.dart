@@ -39,10 +39,7 @@ class _LoadedHomeContent extends StatelessWidget {
       slivers: [
         _section(
           top: AppSizes.spacingLg,
-          child: StoriesSection(
-            stories: state.stories,
-            onStoryTap: (story) => _openStory(context, story),
-          ),
+          child: StoriesSection(stories: state.stories, onStoryTap: (story) => _openStory(context, story)),
         ),
         _section(
           top: AppSizes.spacingXl,
@@ -54,12 +51,7 @@ class _LoadedHomeContent extends StatelessWidget {
           child: AppText(localizations.popularTitle, style: AppTextStyles.h2()),
         ),
         SliverPadding(
-          padding: const .fromLTRB(
-            AppSizes.screenPadding,
-            0,
-            AppSizes.screenPadding,
-            AppSizes.spacingXl,
-          ),
+          padding: const .fromLTRB(AppSizes.screenPadding, 0, AppSizes.screenPadding, AppSizes.spacingXl),
           sliver: ProductGrid(
             products: state.products,
             onProductTap: (product) {},
@@ -75,26 +67,15 @@ class _LoadedHomeContent extends StatelessWidget {
     );
   }
 
-  SliverPadding _section({
-    required Widget child,
-    required double top,
-    double bottom = 0,
-  }) {
+  SliverPadding _section({required Widget child, required double top, double bottom = 0}) {
     return SliverPadding(
-      padding: .fromLTRB(
-        AppSizes.screenPadding,
-        top,
-        AppSizes.screenPadding,
-        bottom,
-      ),
+      padding: .fromLTRB(AppSizes.screenPadding, top, AppSizes.screenPadding, bottom),
       sliver: SliverToBoxAdapter(child: child),
     );
   }
 
   Future<void> _openStory(BuildContext context, Story story) {
-    context.read<HomeCubit>().markStoryViewed(
-      story.id ?? AppSettings.emptyString,
-    );
+    context.read<HomeCubit>().markStoryViewed(story.id ?? AppSettings.emptyString);
     return showStoryViewer(context, story: story);
   }
 }

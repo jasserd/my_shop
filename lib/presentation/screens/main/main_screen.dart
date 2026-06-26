@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/navigation/navigation.dart';
 
 class MainScreen extends StatelessWidget {
@@ -21,7 +22,7 @@ class MainScreen extends StatelessWidget {
   void _navigate(int index) {
     navigationShell.goBranch(
       index,
-      initialLocation: index == navigationShell.currentIndex,
+      initialLocation: index == navigationShell.currentIndex || index == NavigationConstants.cartBranchIndex,
     );
   }
 }

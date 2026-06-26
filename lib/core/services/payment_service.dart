@@ -6,34 +6,25 @@ import 'package:yookassa_payments_flutter/yookassa_payments_flutter.dart';
 enum PaymentStatus { success, failed }
 
 class PaymentService {
-  Future<PaymentStatus> pay({
-    required int amount,
-    required String title,
-    required String subtitle,
-  }) async {
+  Future<PaymentStatus> pay({required int amount, required String title, required String subtitle}) async {
     try {
       final charge = Amount(value: amount.toString(), currency: Currency.rub);
       final result = await YookassaPaymentsFlutter.tokenization(
         TokenizationModuleInputData(
-          clientApplicationKey: YooKassaPaymentConfig.clientApplicationKey,
+          clientApplicationKey: PaymentConfig.clientApplicationKey,
           title: title,
           subtitle: subtitle,
           amount: charge,
-          shopId: YooKassaPaymentConfig.shopId,
+          shopId: PaymentConfig.shopId,
           savePaymentMethod: SavePaymentMethod.off,
           testModeSettings: TestModeSettings(
-            YooKassaPaymentConfig.paymentAuthorizationPassed,
-            YooKassaPaymentConfig.testCardsCount,
+            PaymentConfig.paymentAuthorizationPassed,
+            PaymentConfig.testCardsCount,
             charge,
-            YooKassaPaymentConfig.enablePaymentError,
+            PaymentConfig.enablePaymentError,
           ),
-          customizationSettings: const CustomizationSettings(
-            AppColors.primary,
-            false,
-          ),
-          tokenizationSettings: TokenizationSettings(
-            PaymentMethodTypes.bankCard,
-          ),
+          customizationSettings: const CustomizationSettings(AppColors.primary, false),
+          tokenizationSettings: const TokenizationSettings(PaymentMethodTypes.bankCard),
         ),
       );
 
