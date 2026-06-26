@@ -5,4 +5,5 @@ abstract final class AppRoutes {
   static const favorites = '/favorites';
   static const cart = '/cart';
   static const payment = '/payment';
+  static const paymentFailure = '/payment-failure';
 }

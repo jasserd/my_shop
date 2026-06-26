@@ -11,6 +11,7 @@ import 'package:my_shop/presentation/screens/favorites/favorites_screen.dart';
 import 'package:my_shop/presentation/screens/home/bloc/home_cubit.dart';
 import 'package:my_shop/presentation/screens/home/home_screen.dart';
 import 'package:my_shop/presentation/screens/main/main_screen.dart';
+import 'package:my_shop/presentation/screens/payment/payment_failure_screen.dart';
 import 'package:my_shop/presentation/screens/payment/payment_screen.dart';
 import 'package:my_shop/core/navigation/app_routes.dart';
 
@@ -74,6 +75,10 @@ final appRouter = GoRouter(
             GoRoute(
               path: AppRoutes.payment,
               builder: (context, state) => const PaymentScreen(),
+            ),
+            GoRoute(
+              path: AppRoutes.paymentFailure,
+              builder: (context, state) => const PaymentFailureScreen(),
             ),
           ],
         ),

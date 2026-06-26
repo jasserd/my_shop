@@ -206,6 +206,16 @@ class AppLocalizationsRu extends AppLocalizations {
       'Спасибо за заказ! Ваш заказ принят в обработку. Ожидайте доставку в ближайшее время.';
 
   @override
+  String get paymentFailureTitle => 'Оплата не прошла';
+
+  @override
+  String get paymentFailureDescription =>
+      'Не удалось завершить оплату. Попробуйте ещё раз или выберите другой способ оплаты.';
+
+  @override
+  String get paymentOrderSubtitle => 'Оплата заказа в MyShop';
+
+  @override
   String get storyNew => 'Новинки';
 
   @override

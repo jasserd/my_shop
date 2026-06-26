@@ -484,6 +484,24 @@ abstract class AppLocalizations {
   /// **'Спасибо за заказ! Ваш заказ принят в обработку. Ожидайте доставку в ближайшее время.'**
   String get paymentSuccessDescription;
 
+  /// No description provided for @paymentFailureTitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата не прошла'**
+  String get paymentFailureTitle;
+
+  /// No description provided for @paymentFailureDescription.
+  ///
+  /// In ru, this message translates to:
+  /// **'Не удалось завершить оплату. Попробуйте ещё раз или выберите другой способ оплаты.'**
+  String get paymentFailureDescription;
+
+  /// No description provided for @paymentOrderSubtitle.
+  ///
+  /// In ru, this message translates to:
+  /// **'Оплата заказа в MyShop'**
+  String get paymentOrderSubtitle;
+
   /// No description provided for @storyNew.
   ///
   /// In ru, this message translates to:

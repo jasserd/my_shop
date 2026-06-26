@@ -6,8 +6,8 @@ import 'package:my_shop/core/navigation/navigation.dart';
 import 'package:my_shop/presentation/screens/payment/widgets/payment_result_content.dart';
 import 'package:my_shop/shared/components/components.dart';
 
-class PaymentScreen extends StatelessWidget {
-  const PaymentScreen({super.key});
+class PaymentFailureScreen extends StatelessWidget {
+  const PaymentFailureScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,10 +25,10 @@ class PaymentScreen extends StatelessWidget {
           ),
           Expanded(
             child: PaymentResultContent(
-              icon: Icons.check,
-              iconColor: AppColors.success,
-              title: localizations.paymentSuccessTitle,
-              description: localizations.paymentSuccessDescription,
+              icon: Icons.close,
+              iconColor: AppColors.error,
+              title: localizations.paymentFailureTitle,
+              description: localizations.paymentFailureDescription,
               onGoHome: () => context.go(AppRoutes.home),
             ),
           ),

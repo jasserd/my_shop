@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:my_shop/core/constants/constants.dart';
 import 'package:my_shop/core/l10n/l10n.dart';
 import 'package:my_shop/core/navigation/navigation.dart';
+import 'package:my_shop/core/services/services.dart';
 import 'package:my_shop/presentation/screens/cart/bloc/cart_cubit.dart';
 import 'package:my_shop/presentation/screens/cart/bloc/cart_state.dart';
 import 'package:my_shop/presentation/screens/cart/widgets/cart_checkout_panel.dart';
@@ -35,6 +36,7 @@ class _FilledCart extends StatelessWidget {
   const _FilledCart({required this.state});
 
   final CartState state;
+  static final _paymentService = PaymentService();
 
   @override
   Widget build(BuildContext context) {
@@ -75,14 +77,32 @@ class _FilledCart extends StatelessWidget {
           child: CartCheckoutPanel(
             totalPrice: state.totalPrice,
             isCheckoutEnabled: state.isCheckoutEnabled,
-            onCheckout: () {
-              cartCubit.checkout();
-              context.go(AppRoutes.payment);
-            },
+            onCheckout: () => _checkout(context, cartCubit),
           ),
         ),
       ],
     );
+  }
+
+  Future<void> _checkout(BuildContext context, CartCubit cartCubit) async {
+    final localizations = AppLocalizations.of(context);
+    final status = await _paymentService.pay(
+      amount: state.totalPrice,
+      title: localizations.appName,
+      subtitle: localizations.paymentOrderSubtitle,
+    );
+
+    if (context.mounted == false) {
+      return;
+    }
+
+    if (status == PaymentStatus.success) {
+      cartCubit.checkout();
+      context.go(AppRoutes.payment);
+      return;
+    }
+
+    context.go(AppRoutes.paymentFailure);
   }
 }
 
